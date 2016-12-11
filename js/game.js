@@ -31,7 +31,8 @@ var gameWon = false;   // flag for if the current level has been won yet
 
 var w = 990;
 var h = 700;
-var topfloor = 460
+var bottom-topfloor = 455
+var top-topfloor = 450
 
 var cursors;
 var player;
@@ -52,8 +53,8 @@ playGame.prototype = {
 	preload: function() {
     // preloading the assets
     game.load.image('background', '/assets/images/background.png');
-    game.load.image('anne-idle', '/assets/images/annefrank-idle.png')
-    game.load.spritesheet('anne-walk', '/assets/images/annefrank-walk.png', 120, 250, 5);
+    game.load.image('anne-idle-left', '/assets/images/annefrank-idle-left.png')
+    game.load.spritesheet('anne-walk-left', '/assets/images/annefrank-walk-left.png', 120, 250, 5);
 	},
 	
 	create: function() { 
@@ -65,29 +66,39 @@ playGame.prototype = {
     playerData.height = 250;
     cursors = game.input.keyboard.createCursorKeys();
     
-		player = game.add.sprite(game.world.centerX, topfloor-playerData.height, 'anne-idle');
-    player.animations.add('anne-idle');
-    player.animations.add('anne-walk');
-    player.animations.play('anne-idle', 1, true);
+		player = game.add.sprite(game.world.centerX, topfloor-playerData.height, 'anne-idle-left');
+    player.animations.add('anne-idle-left');
+    player.animations.add('anne-walk-left');
+    player.animations.play('anne-idle-left', 1, true);
     player.anchor.setTo(0.5, 0.5);
 	},
 	
 	update: function() {
     if(cursors.left.isDown) {
       if(player.x > 90) {
-        // walking animation
-        changeSprite(player, 'anne-walk', 'anne-walk', 5)
+        // walking animation, TODO change to right
+        changeSprite(player, 'anne-walk-left', 'anne-walk-left', 5)
         player.x -= 1*playerData.speed;
       }
     } else if (cursors.right.isDown) {
       if(player.x < w-90) {
         // walking animation
-        changeSprite(player, 'anne-walk', 'anne-walk', 5)
+        changeSprite(player, 'anne-walk-left', 'anne-walk-left', 5)
         player.x += 1*playerData.speed;
       }
-    } else {
+    } else if (cursors.up.isDown) {
+      if(player.y > top-topfloor {
+        changeSprite(player, 'anne-walk-left', 'anne-walk-left', 5)
+        player.y -= 1*playerData.speed
+      })
+    } else if (cursors.down.isDown) {
+      if player.y < bottom-topfloor {
+        changeSprite(player, 'anne-walk-left', 'anne-walk-left', 5)
+        player.y += 1*playerData.speed
+      }
+    }  else {
       // idle animation
-      changeSprite(player, 'anne-idle', 'anne-idle', 1)
+      changeSprite(player, 'anne-idle-left', 'anne-idle-left', 1)
     }
 	},
 	
