@@ -31,7 +31,7 @@ var gameWon = false;   // flag for if the current level has been won yet
 
 var w = 990;
 var h = 700;
-var topfloor = 470
+var topfloor = 460
 
 var cursors;
 var player;
@@ -60,7 +60,7 @@ playGame.prototype = {
     background = game.add.sprite(0,0, 'background')
     // background.autoScroll(0, 30)
     
-    playerData.speed = 5;
+    playerData.speed = 3;
     playerData.width = 120;
     playerData.height = 250;
     cursors = game.input.keyboard.createCursorKeys();
@@ -76,18 +76,18 @@ playGame.prototype = {
     if(cursors.left.isDown) {
       if(player.x > 90) {
         // walking animation
-        changeSprite(player, 'anne-walk', 'walk', 5)
+        changeSprite(player, 'anne-walk', 'anne-walk', 5)
         player.x -= 1*playerData.speed;
       }
     } else if (cursors.right.isDown) {
       if(player.x < w-90) {
         // walking animation
-        changeSprite(player, 'anne-walk', 'walk', 5)
+        changeSprite(player, 'anne-walk', 'anne-walk', 5)
         player.x += 1*playerData.speed;
       }
     } else {
       // idle animation
-      changeSprite(player, 'anne-idle', 'idle', 1)
+      changeSprite(player, 'anne-idle', 'anne-idle', 1)
     }
 	},
 	
