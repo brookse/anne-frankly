@@ -68,7 +68,6 @@ playGame.prototype = {
     
 		player = game.add.sprite(game.world.centerX, bottom_topfloor-playerData.height, 'anne-idle-left');
     player.animations.add('anne-idle-left');
-    player.animations.add('anne-walk-left');
     player.animations.play('anne-idle-left', 1, true);
     player.anchor.setTo(0.5, 0.5);
 	},
@@ -109,5 +108,6 @@ playGame.prototype = {
 
 function changeSprite(character, sprite, name, framerate) {
   character.loadTexture(sprite, 0);
+  player.animations.add(name);
   character.animations.play(name, framerate, false);
 }
