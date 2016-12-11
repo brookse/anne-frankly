@@ -90,7 +90,7 @@ playGame.prototype = {
       if(player.y > top_topfloor) {
         changeSprite(player, 'anne-walk-left', 'anne-walk-left', 5);
         player.y -= 1*playerData.speed;
-      })
+      }
     } else if (cursors.down.isDown) {
       if (player.y < bottom_topfloor) {
         changeSprite(player, 'anne-walk-left', 'anne-walk-left', 5);
