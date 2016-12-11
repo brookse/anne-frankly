@@ -1,0 +1,15 @@
+body {
+    background-color: "#ffffff";
+}
+#game canvas {
+    margin: 0 auto;
+}
+
+@media (max-width: 509px) {
+  #game canvas {
+    width: auto;
+    padding: 0;
+    position: absolute;
+    margin: 0;
+  }
+}
