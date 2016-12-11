@@ -59,12 +59,12 @@ playGame.prototype = {
     background = game.add.sprite(0,0, 'background')
     // background.autoScroll(0, 30)
     
-    playerData.speed = 10;
+    playerData.speed = 3;
     playerData.width = 120;
     playerData.height = 250;
     cursors = game.input.keyboard.createCursorKeys();
     
-		player = game.add.sprite(game.world.centerX, h-100, 'anne-idle');
+		player = game.add.sprite(game.world.centerX, 0+playerData.height, 'anne-idle');
     spaceman.animations.add('anne-idle');
     spaceman.animations.play('anne-idle', 1, true);
     player.anchor.setTo(0.5, 0.5);
