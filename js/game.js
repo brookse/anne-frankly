@@ -66,7 +66,7 @@ playGame.prototype = {
     playerData.height = 250;
     cursors = game.input.keyboard.createCursorKeys();
     
-		player = game.add.sprite(game.world.centerX, topfloor-playerData.height, 'anne-idle-left');
+		player = game.add.sprite(game.world.centerX, bottom_topfloor-playerData.height, 'anne-idle-left');
     player.animations.add('anne-idle-left');
     player.animations.add('anne-walk-left');
     player.animations.play('anne-idle-left', 1, true);
