@@ -74,7 +74,7 @@ playGame.prototype = {
 	
 	update: function() {
     if(cursors.left.isDown) {
-      if(player.x > 90 {
+      if(player.x > 90) {
         // walking animation
         changeSprite(player, 'anne-walk', 'walk', 5)
         player.x -= 1*playerData.speed;
