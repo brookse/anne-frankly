@@ -31,8 +31,8 @@ var gameWon = false;   // flag for if the current level has been won yet
 
 var w = 990;
 var h = 700;
+var top_topfloor = 400;
 var bottom_topfloor = 455;
-var top_topfloor = 450;
 
 var cursors;
 var player;
@@ -76,23 +76,23 @@ playGame.prototype = {
 	update: function() {
     if(cursors.left.isDown) {
       if(player.x > 90) {
-        // walking animation, TODO change to right
+        // walking animation
         changeSprite(player, 'anne-walk-left', 'anne-walk-left', 5);
         player.x -= 1*playerData.speed;
       }
     } else if (cursors.right.isDown) {
       if(player.x < w-90) {
-        // walking animation
+        // walking animation, TODO change to right
         changeSprite(player, 'anne-walk-left', 'anne-walk-left', 5);
         player.x += 1*playerData.speed;
       }
     } else if (cursors.up.isDown) {
-      if(player.y > top_topfloor) {
+      if(player.y+playerData.height > top_topfloor) {
         changeSprite(player, 'anne-walk-left', 'anne-walk-left', 5);
         player.y -= 1*playerData.speed;
       }
     } else if (cursors.down.isDown) {
-      if (player.y < bottom_topfloor) {
+      if (player.y+playerData.height < bottom_topfloor) {
         changeSprite(player, 'anne-walk-left', 'anne-walk-left', 5);
         player.y += 1*playerData.speed;
       }
