@@ -31,6 +31,7 @@ var gameWon = false;   // flag for if the current level has been won yet
 
 var w = 990;
 var h = 700;
+var topfloor = 470
 
 var cursors;
 var player;
@@ -59,28 +60,29 @@ playGame.prototype = {
     background = game.add.sprite(0,0, 'background')
     // background.autoScroll(0, 30)
     
-    playerData.speed = 3;
+    playerData.speed = 5;
     playerData.width = 120;
     playerData.height = 250;
     cursors = game.input.keyboard.createCursorKeys();
     
-		player = game.add.sprite(game.world.centerX, 0+playerData.height, 'anne-idle');
-    spaceman.animations.add('anne-idle');
-    spaceman.animations.play('anne-idle', 1, true);
+		player = game.add.sprite(game.world.centerX, topfloor-playerData.height, 'anne-idle');
+    player.animations.add('anne-idle');
+    player.animations.add('anne-walk');
+    player.animations.play('anne-idle', 1, true);
     player.anchor.setTo(0.5, 0.5);
 	},
 	
 	update: function() {
     if(cursors.left.isDown) {
-      if(player.x > playerData.width) {
+      if(player.x > 90 {
         // walking animation
-        changeSprite(player, 'anne-walk', 'walk', 6)
+        changeSprite(player, 'anne-walk', 'walk', 5)
         player.x -= 1*playerData.speed;
       }
     } else if (cursors.right.isDown) {
-      if(player.x < w-playerData.width) {
+      if(player.x < w-90) {
         // walking animation
-        changeSprite(player, 'anne-walk', 'walk', 6)
+        changeSprite(player, 'anne-walk', 'walk', 5)
         player.x += 1*playerData.speed;
       }
     } else {
@@ -96,6 +98,5 @@ playGame.prototype = {
 
 function changeSprite(character, sprite, name, framerate) {
   character.loadTexture(sprite, 0);
-  character.animations.add(name);
   character.animations.play(name, framerate, false);
 }
