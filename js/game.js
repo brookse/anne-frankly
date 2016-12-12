@@ -43,6 +43,10 @@ var officer;
 var officerData = {};
 var margot;
 var margotData = {};
+var otto;
+var ottoData = {};
+var edith;
+var edithData = {};
 
 // creation of the game
 window.onload = function() {
@@ -128,12 +132,60 @@ playGame.prototype = {
 		margotData.option = 0
 		margotData.readyToSwitch = false
 		game.time.events.loop(Phaser.Timer.SECOND * 4, switchNPC, game, margotData)
+		
+		/* Otto stuff */
+		ottoData.speed = 2;
+    ottoData.width = 120;
+    ottoData.height = 250;
+		ottoData.facingLeft = true;
+		ottoData.idleLeft = 'otto-idle-left';
+		ottoData.idleRight = 'otto-idle-right';
+		ottoData.idleLooking = 'otto-idle-looking';
+		ottoData.walkLeft = 'otto-walk-left';
+		ottoData.walkRight = 'otto-walk-right';
+    
+		otto = game.add.sprite(3*game.world.centerX/4, bottom_topfloor-ottoData.height, 'otto-ss');
+		otto.animations.add('otto-idle-left', [0], 1, true);
+		otto.animations.add('otto-idle-right', [1], 1, true);
+		otto.animations.add('otto-idle-looking', [0,0,1,1,0,0,0,1], 3, true);
+		otto.animations.add('otto-walk-left', [2,3,4,5,6], 10, true);
+		otto.animations.add('otto-walk-right', [7,8,9,10,11], 10, true);
+    otto.animations.play('otto-idle-looking');
+    otto.anchor.setTo(0.5, 0.5);
+		ottoData.option = 0
+		ottoData.readyToSwitch = false
+		game.time.events.loop(Phaser.Timer.SECOND * 4, switchNPC, game, ottoData)
+		
+		/* Edith stuff */
+		edithData.speed = 2;
+    edithData.width = 120;
+    edithData.height = 250;
+		edithData.facingLeft = true;
+		edithData.idleLeft = 'edith-idle-left';
+		edithData.idleRight = 'edith-idle-right';
+		edithData.idleLooking = 'edith-idle-looking';
+		edithData.walkLeft = 'edith-walk-left';
+		edithData.walkRight = 'edith-walk-right';
+    
+		edith = game.add.sprite(100, bottom_topfloor-edithData.height, 'edith-ss');
+		edith.animations.add('edith-idle-left', [0], 1, true);
+		edith.animations.add('edith-idle-right', [1], 1, true);
+		edith.animations.add('edith-idle-looking', [0,0,1,1,0,0,0,1], 3, true);
+		edith.animations.add('edith-walk-left', [2,3,4,5,6], 10, true);
+		edith.animations.add('edith-walk-right', [7,8,9,10,11], 10, true);
+    edith.animations.play('edith-idle-looking');
+    edith.anchor.setTo(0.5, 0.5);
+		edithData.option = 0
+		edithData.readyToSwitch = false
+		game.time.events.loop(Phaser.Timer.SECOND * 4, switchNPC, game, edithData)
 	},
 	
 	update: function() {
 		playerMovement(cursors, player, playerData);
 		npcMovement(officer, officerData, 509, 565, 90, w-90);
 		npcMovement(margot, margotData, top_topfloor-margotData.height, bottom_topfloor-playerData.height, 90, w-90);
+		npcMovement(otto, ottoData, top_topfloor-ottoData.height, bottom_topfloor-ottoData.height, 90, w-90);
+		npcMovement(edith, edithData, top_topfloor-edithData.height, bottom_topfloor-edithData.height, 90, w-90);
 	},
 	
 	render: function() {
