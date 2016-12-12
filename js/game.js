@@ -114,9 +114,10 @@ function switchOfficer(officerData) {
 function officerMovement(officer, officerData) {
 	if (officerData.readyToSwitch) {
 		officerData.option = game.rnd.between(0, 6);
+		officerData.readyToSwitch = false;
 	}
 	
-	switch (option) {
+	switch (officerData.option) {
 		case 0:		// idle looking
 			officer.animations.play('officer-idle-looking');
 			break;
