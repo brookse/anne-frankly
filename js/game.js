@@ -53,8 +53,9 @@ playGame.prototype = {
 	preload: function() {
     // preloading the assets
     game.load.image('background', '/assets/images/background.png');
-    game.load.spritesheet('anne-idle', '/assets/images/annefrank-idle.png', 120, 250)
-    game.load.spritesheet('anne-walk', '/assets/images/annefrank-walk.png', 120, 250);
+    // game.load.spritesheet('anne-idle', '/assets/images/annefrank-idle.png', 120, 250)
+    // game.load.spritesheet('anne-walk', '/assets/images/annefrank-walk.png', 120, 250);
+    game.load.spritesheet('anne-ss', '/assets/images/annefrank-ss.png', 120, 250);
 	},
 	
 	create: function() { 
@@ -67,20 +68,19 @@ playGame.prototype = {
 		playerData.facingLeft = true;
     cursors = game.input.keyboard.createCursorKeys();
     
-		player = game.add.sprite(game.world.centerX, bottom_topfloor-playerData.height, 'anne-idle-left');
+		player = game.add.sprite(game.world.centerX, bottom_topfloor-playerData.height, 'anne-ss');
+		player.animations.add('anne-idle-left', [0], 1, true);
+		player.animations.add('anne-idle-right', [1], 1, true);
+		player.animations.add('anne-walk-left', [2,3,4,5,6], 5, true);
+		player.animations.add('anne-walk-right', [7,8,9,10,11], 5, true);
+    player.animations.play('anne-idle-left');
     player.anchor.setTo(0.5, 0.5);
-		
-    player.animations.add('anne-walk-left', [0,1,2,3,4], 5, true);
-    player.animations.add('anne-walk-right', [5,6,7,8,9], 5, true);
-    player.animations.play('anne-idle-left', [0], 1, true);
 	},
 	
 	update: function() {
     if(cursors.left.isDown) {
       if(player.x > 90) {
         // walking animation
-				player.loadTexture('anne-walk')
-				player.animations.add('anne-walk-left', [0,1,2,3,4], 5, true);
         player.animations.play('anne-walk-left');
         player.x -= 1*playerData.speed;
 				playerData.facingLeft = true;
@@ -88,8 +88,6 @@ playGame.prototype = {
     } else if (cursors.right.isDown) {
       if(player.x < w-90) {
         // walking animation, TODO change to right
-				player.loadTexture('anne-walk')
-				player.animations.add('anne-walk-right', [5,6,7,8,9], 5, true);
 				player.animations.play('anne-walk-right');
         player.x += 1*playerData.speed;
 				playerData.facingLeft = false;
@@ -99,8 +97,6 @@ playGame.prototype = {
 			
       if(player.y+playerData.height > top_topfloor) {
 				if(playerData.facingLeft) {
-					player.loadTexture('anne-walk')
-					player.animations.add('anne-walk-left', [0,1,2,3,4], 5, true);
 	        player.animations.play('anne-walk-left');
 					if (cursors.left.isDown) {
 						player.x -= 1*playerData.speed;
@@ -109,8 +105,6 @@ playGame.prototype = {
 						player.y -= 1*playerData.speed;
 					}
 				} else {
-					player.loadTexture('anne-walk')
-		    	player.animations.add('anne-walk-right', [5,6,7,8,9], 5, true);
 	        player.animations.play('anne-walk-right');
 					if (cursors.right.isDown) {
 						player.x += 1*playerData.speed;
@@ -125,8 +119,6 @@ playGame.prototype = {
 			
       if (player.y+playerData.height < bottom_topfloor) {
 				if(playerData.facingLeft) {
-				player.loadTexture('anne-walk')
-					player.animations.add('anne-walk-left', [0,1,2,3,4], 5, true);
 	        player.animations.play('anne-walk-left');
 					if (cursors.left.isDown) {
 						player.x -= 1*playerData.speed;
@@ -135,8 +127,6 @@ playGame.prototype = {
 						player.y += 1*playerData.speed;
 					}
 				} else {
-					player.loadTexture('anne-walk')
-		    	player.animations.add('anne-walk-right', [5,6,7,8,9], 5, true);
 	        player.animations.play('anne-walk-right');
 					if (cursors.right.isDown) {
 						player.x += 1*playerData.speed;
@@ -150,12 +140,8 @@ playGame.prototype = {
     }  else {
 			
 			if(playerData.facingLeft) {
-				player.loadTexture('anne-idle');
-				player.animations.add('anne-idle-left', [0], 1, true);
 				player.animations.play('anne-idle-left');
 			} else {
-				player.loadTexture('anne-idle');
-				player.animations.add('anne-idle-right', [1], 1, true);
 				player.animations.play('anne-idle-right');
 			}
     }
