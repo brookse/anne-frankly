@@ -108,14 +108,17 @@ playGame.prototype = {
 }
 
 function switchOfficer(officerData) {
+	console.log('before: '+officerData.readyToSwitch+' | '+officerData.option);
 	officerData.readyToSwitch = !officerData.readyToSwitch;
+	officerData.option = game.rnd.between(0, 6);
+	console.log('switched: '+officerData.readyToSwitch+' | '+officerData.option);
 }
 
 function officerMovement(officer, officerData) {
-	if (officerData.readyToSwitch) {
-		officerData.option = game.rnd.between(0, 6);
-		officerData.readyToSwitch = false;
-	}
+	// if (officerData.readyToSwitch) {
+	// 	officerData.option = game.rnd.between(0, 6);
+	// 	officerData.readyToSwitch = false;
+	// }
 	
 	switch (officerData.option) {
 		case 0:		// idle looking
