@@ -92,11 +92,11 @@ playGame.prototype = {
 		officer.animations.add('officer-walk-right', [7,8,9,10,11], 10, true);
     officer.animations.play('officer-idle-looking');
     officer.anchor.setTo(0.5, 0.5);
+		game.time.events.loop(Phaser.Timer.SECOND * 2, officerMovement, game, officer, officerData)
 	},
 	
 	update: function() {
 		playerMovement(cursors, player, playerData);
-		game.time.events.loop(Phaser.Timer.SECOND * 3, officerMovement, game, officer, officerData)
 	},
 	
 	render: function() {
