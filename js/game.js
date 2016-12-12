@@ -33,8 +33,8 @@ var w = 990;
 var h = 700;
 var top_topfloor = 400;
 var bottom_topfloor = 455;
-var top_bottomfloor = 770;
-var bottom_bottomfloor = 825;
+var top_bottomfloor = 760;
+var bottom_bottomfloor = 815;
 
 var cursors;
 var player;
