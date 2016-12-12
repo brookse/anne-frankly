@@ -96,7 +96,7 @@ playGame.prototype = {
 	
 	update: function() {
 		playerMovement(cursors, player, playerData);
-		game.time.events.loop(Phaser.Timer.SECOND * 3, officerMovement, game, [officer, officerData])
+		game.time.events.loop(Phaser.Timer.SECOND * 3, officerMovement, game, officer, officerData)
 	},
 	
 	render: function() {
