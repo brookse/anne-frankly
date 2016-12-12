@@ -118,9 +118,9 @@ function switchOfficer(officerData) {
 
 function officerMovement(officer, officerData) {
 	console.log("x: "+officer.x+" | y: "+officer.y)
-	if(officer.x == 90 || officer.x == w-90 || officer.y == 509 || officer.y == 565) {
-		officer.animations.play('officer-idle-looking');
-	}
+	// if(officer.x == 90 || officer.x == w-90 || officer.y == 509 || officer.y == 565) {
+	// 	officer.animations.play('officer-idle-looking');
+	// }
 	switch (officerData.option) {
 		case 0:		// idle looking
 			officer.animations.play('officer-idle-looking');
