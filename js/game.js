@@ -74,8 +74,7 @@ playGame.prototype = {
 	},
 	
 	update: function() {
-		playerMovement()
-    
+		playerMovement(cursors, player, playerData)
 	},
 	
 	render: function() {
