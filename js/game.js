@@ -114,19 +114,17 @@ function switchOfficer(officerData) {
 	} else {
 		officerData.option = 0
 	}
+	console.log('new option:'+officerData.option)
 }
 
 function officerMovement(officer, officerData) {
 	console.log("x: "+officer.x+" | y: "+officer.y)
-	// if(officer.x == 90 || officer.x == w-90 || officer.y == 509 || officer.y == 565) {
-	// 	officer.animations.play('officer-idle-looking');
-	// }
 	switch (officerData.option) {
 		case 0:		// idle looking
 			officer.animations.play('officer-idle-looking');
 			break;
 		case 1:		// move left
-			if (officer.x == 90) {
+			if (officer.x <= 90) {
 				officer.animations.play('officer-idle-looking');
 			} else if(officer.x > 90) {
 				officer.animations.play('officer-walk-left');
@@ -135,7 +133,7 @@ function officerMovement(officer, officerData) {
 			}
 			break;
 		case 2:		// move right
-			if (officer.x == 90) {
+			if (officer.x >= w-90) {
 				officer.animations.play('officer-idle-looking');
 			} else if(officer.x < w-90) {
 				officer.animations.play('officer-walk-right');
@@ -144,7 +142,7 @@ function officerMovement(officer, officerData) {
 			}
 			break;
 		case 3:		// move up
-			if (officer.y == 509) {
+			if (officer.y <= 509) {
 				officer.animations.play('officer-idle-looking');
 			} else if(officer.y+officerData.height > top_bottomfloor) {
 				if(officerData.facingLeft) {
@@ -157,7 +155,7 @@ function officerMovement(officer, officerData) {
 			}
 			break;
 		case 4:		// move down
-			if (officer.y == 565) {
+			if (officer.y >= 565) {
 				officer.animations.play('officer-idle-looking');
 			} else if (officer.y+officerData.height < bottom_bottomfloor) {
 				if(officerData.facingLeft) {
