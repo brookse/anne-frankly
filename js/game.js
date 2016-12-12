@@ -102,7 +102,7 @@ playGame.prototype = {
     officer.anchor.setTo(0.5, 0.5);
 		officerData.option = 0
 		officerData.readyToSwitch = false
-		game.time.events.loop(Phaser.Timer.SECOND * 2, switchOfficer, game, officerData)
+		game.time.events.loop(Phaser.Timer.SECOND * 2, switchNPC, game, officerData)
 		
 		/* Margot stuff */
 		margotData.speed = 2;
@@ -148,7 +148,7 @@ function switchNPC(data) {
 	}
 }
 
-function officerMovement(npc, data, top, bottom, left, right) {
+function npcMovement(npc, data, top, bottom, left, right) {
 	switch (data.option) {
 		case 0:		// idle looking
 			npc.animations.play(data.idleLooking);
