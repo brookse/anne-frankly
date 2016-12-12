@@ -92,11 +92,14 @@ playGame.prototype = {
 		officer.animations.add('officer-walk-right', [7,8,9,10,11], 10, true);
     officer.animations.play('officer-idle-looking');
     officer.anchor.setTo(0.5, 0.5);
-		game.time.events.loop(Phaser.Timer.SECOND * 2, officerMovement, game, officer, officerData)
+		officerData.option = 0
+		officerData.readyToSwitch = false
+		game.time.events.loop(Phaser.Timer.SECOND * 2, switchOfficer, game, officerData)
 	},
 	
 	update: function() {
 		playerMovement(cursors, player, playerData);
+		officerMovement(officer, officerData);
 	},
 	
 	render: function() {
@@ -104,11 +107,17 @@ playGame.prototype = {
 	}
 }
 
+function switchOfficer(officerData) {
+	officerData.readyToSwitch = !officerData.readyToSwitch;
+}
+
 function officerMovement(officer, officerData) {
-	option = game.rnd.between(0, 6)
+	if (officerData.readyToSwitch) {
+		officerData.option = game.rnd.between(0, 6);
+	}
 	
 	switch (option) {
-		case 0, 5, 6:		// idle looking
+		case 0:		// idle looking
 			officer.animations.play('officer-idle-looking');
 			break;
 		case 1:		// move left
