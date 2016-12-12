@@ -33,8 +33,8 @@ var w = 990;
 var h = 700;
 var top_topfloor = 400;
 var bottom_topfloor = 455;
-var top_bottomfloor = 835;
-var bottom_bottomfloor = 870;
+var top_bottomfloor = 785;
+var bottom_bottomfloor = 840;
 
 var cursors;
 var player;
@@ -87,7 +87,7 @@ playGame.prototype = {
 		officer = game.add.sprite(game.world.centerX, bottom_bottomfloor-officerData.height, 'officer-ss');
 		officer.animations.add('officer-idle-left', [0], 1, true);
 		officer.animations.add('officer-idle-right', [1], 1, true);
-		officer.animations.add('officer-idle-looking', [0,0,1,1,0,0,0,1], 10, true);
+		officer.animations.add('officer-idle-looking', [0,0,1,1,0,0,0,1], 5, true);
 		officer.animations.add('officer-walk-left', [2,3,4,5,6], 10, true);
 		officer.animations.add('officer-walk-right', [7,8,9,10,11], 10, true);
     officer.animations.play('officer-idle-looking');
@@ -95,8 +95,7 @@ playGame.prototype = {
 	},
 	
 	update: function() {
-		playerMovement(cursors, player, playerData)
-		officer.animations.play('officer-idle-looking');
+		playerMovement(cursors, player, playerData);
 	},
 	
 	render: function() {
