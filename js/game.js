@@ -34,7 +34,7 @@ var h = 700;
 var top_topfloor = 400;
 var bottom_topfloor = 455;
 var top_bottomfloor = 835;
-var bottom_bottomfloor = 890;
+var bottom_bottomfloor = 870;
 
 var cursors;
 var player;
@@ -90,13 +90,13 @@ playGame.prototype = {
 		officer.animations.add('officer-idle-looking', [0,0,1,1,0,0,0,1], 10, true);
 		officer.animations.add('officer-walk-left', [2,3,4,5,6], 10, true);
 		officer.animations.add('officer-walk-right', [7,8,9,10,11], 10, true);
-    officer.animations.play('officer-idle-left');
+    officer.animations.play('officer-idle-looking');
     officer.anchor.setTo(0.5, 0.5);
 	},
 	
 	update: function() {
 		playerMovement(cursors, player, playerData)
-		player.animations.play('officer-idle-looking');
+		officer.animations.play('officer-idle-looking');
 	},
 	
 	render: function() {
