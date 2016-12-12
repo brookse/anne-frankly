@@ -144,17 +144,17 @@ playGame.prototype = {
 		ottoData.walkLeft = 'otto-walk-left';
 		ottoData.walkRight = 'otto-walk-right';
     
-		otto = game.add.sprite(3*game.world.centerX/4, bottom_topfloor-ottoData.height, 'otto-ss');
+		otto = game.add.sprite(game.world.centerX+200, bottom_topfloor-ottoData.height, 'otto-ss');
 		otto.animations.add('otto-idle-left', [0], 1, true);
 		otto.animations.add('otto-idle-right', [1], 1, true);
-		otto.animations.add('otto-idle-looking', [0,0,1,1,0,0,0,1], 3, true);
+		otto.animations.add('otto-idle-looking', [1,0,0,1,1,1,0,1], 3, true);
 		otto.animations.add('otto-walk-left', [2,3,4,5,6], 10, true);
 		otto.animations.add('otto-walk-right', [7,8,9,10,11], 10, true);
     otto.animations.play('otto-idle-looking');
     otto.anchor.setTo(0.5, 0.5);
 		ottoData.option = 0
 		ottoData.readyToSwitch = false
-		game.time.events.loop(Phaser.Timer.SECOND * 4, switchNPC, game, ottoData)
+		game.time.events.loop(Phaser.Timer.SECOND * 5, switchNPC, game, ottoData)
 		
 		/* Edith stuff */
 		edithData.speed = 2;
@@ -170,14 +170,14 @@ playGame.prototype = {
 		edith = game.add.sprite(100, bottom_topfloor-edithData.height, 'edith-ss');
 		edith.animations.add('edith-idle-left', [0], 1, true);
 		edith.animations.add('edith-idle-right', [1], 1, true);
-		edith.animations.add('edith-idle-looking', [0,0,1,1,0,0,0,1], 3, true);
+		edith.animations.add('edith-idle-looking', [1,1,0,0,0,1,0,0], 3, true);
 		edith.animations.add('edith-walk-left', [2,3,4,5,6], 10, true);
 		edith.animations.add('edith-walk-right', [7,8,9,10,11], 10, true);
     edith.animations.play('edith-idle-looking');
     edith.anchor.setTo(0.5, 0.5);
 		edithData.option = 0
 		edithData.readyToSwitch = false
-		game.time.events.loop(Phaser.Timer.SECOND * 4, switchNPC, game, edithData)
+		game.time.events.loop(Phaser.Timer.SECOND * 6, switchNPC, game, edithData)
 	},
 	
 	update: function() {
