@@ -96,10 +96,59 @@ playGame.prototype = {
 	
 	update: function() {
 		playerMovement(cursors, player, playerData);
+		game.time.events.loop(Phaser.Timer.SECOND * 3, officerMovement, game, [officer, officerData])
 	},
 	
 	render: function() {
     
+	}
+}
+
+function officerMovement(officer, officerData) {
+	option = game.rnd.between(0, 6)
+	
+	switch (option) {
+		case 0, 5, 6:		// idle looking
+			officer.animations.play('officer-idle-looking');
+			break;
+		case 1:		// move left
+			if(officer.x > 90) {
+				officer.animations.play('officer-walk-left');
+				officer.x -= 1*officerData.speed;
+				officerData.facingLeft = true;
+			}
+			break;
+		case 2:		// move right
+			if(officer.x < w-90) {
+				officer.animations.play('officer-walk-right');
+				officer.x += 1*officerData.speed;
+				officerData.facingLeft = false;
+			}
+			break;
+		case 3:		// move up
+			if(officer.y+officerData.height > top_bottomfloor) {
+				if(officerData.facingLeft) {
+					officer.animations.play('officer-walk-left');
+					officer.y -= 1*officerData.speed;
+				} else {
+					officer.animations.play('officer-walk-right');
+					officer.y -= 1*officerData.speed;
+				}
+			}
+			break;
+		case 4:		// move down
+			if (officer.y+officerData.height < bottom_bottomfloor) {
+				if(officerData.facingLeft) {
+					officer.animations.play('officer-walk-left');
+					officer.y += 1*officerData.speed;
+				} else {
+					officer.animations.play('officer-walk-right');
+					officer.y += 1*officerData.speed;
+				}
+			}
+			break;
+		default:
+			officer.animations.play('officer-idle-looking');
 	}
 }
 
@@ -113,7 +162,7 @@ function playerMovement(cursors, player, playerData) {
 		}
 	} else if (cursors.right.isDown) {
 		if(player.x < w-90) {
-			// walking animation, TODO change to right
+			// walking animation
 			player.animations.play('anne-walk-right');
 			player.x += 1*playerData.speed;
 			playerData.facingLeft = false;
