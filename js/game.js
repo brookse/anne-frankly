@@ -67,37 +67,38 @@ playGame.prototype = {
     cursors = game.input.keyboard.createCursorKeys();
     
 		player = game.add.sprite(game.world.centerX, bottom_topfloor-playerData.height, 'anne-idle-left');
-    player.animations.add('anne-idle-left');
-    player.animations.play('anne-idle-left', 1, true);
     player.anchor.setTo(0.5, 0.5);
+		
+    player.animations.add('anne-walk-left', [0,1,2,3,4], 5, true);
+    player.animations.play('anne-idle-left', [0], 1, true);
 	},
 	
 	update: function() {
     if(cursors.left.isDown) {
       if(player.x > 90) {
         // walking animation
-        changeSprite(player, 'anne-walk-left', 'anne-walk-left', 5);
+        player.animations.play('anne-walk-left');
         player.x -= 1*playerData.speed;
       }
     } else if (cursors.right.isDown) {
       if(player.x < w-90) {
         // walking animation, TODO change to right
-        changeSprite(player, 'anne-walk-left', 'anne-walk-left', 5);
+        player.animations.play('anne-walk-left');
         player.x += 1*playerData.speed;
       }
     } else if (cursors.up.isDown) {
       if(player.y+playerData.height > top_topfloor) {
-        changeSprite(player, 'anne-walk-left', 'anne-walk-left', 5);
+			player.animations.play('anne-walk-left');
         player.y -= 1*playerData.speed;
       }
     } else if (cursors.down.isDown) {
       if (player.y+playerData.height < bottom_topfloor) {
-        changeSprite(player, 'anne-walk-left', 'anne-walk-left', 5);
+			player.animations.play('anne-walk-left');
         player.y += 1*playerData.speed;
       }
     }  else {
       // idle animation
-      changeSprite(player, 'anne-idle-left', 'anne-idle-left', 1);
+			player.animations.play('anne-idle-left');
     }
 	},
 	
@@ -106,8 +107,8 @@ playGame.prototype = {
 	}
 }
 
-function changeSprite(character, sprite, name, framerate) {
+function changeSprite(character, sprite, sprites, name, framerate) {
   character.loadTexture(sprite);
-  player.animations.add(name);
-  character.animations.play(name, framerate, true);
+  player.animations.add(name, sprites, framerate, true);
+  character.animations.play(name);
 }
