@@ -79,7 +79,7 @@ playGame.prototype = {
     player.anchor.setTo(0.5, 0.5);
 		
 		/* Officer stuff */
-		officerData.speed = 3;
+		officerData.speed = 2;
     officerData.width = 120;
     officerData.height = 250;
 		officerData.facingLeft = true;
@@ -109,12 +109,12 @@ playGame.prototype = {
 
 function switchOfficer(officerData) {
 	officerData.readyToSwitch = !officerData.readyToSwitch;
-	officerData.option = game.rnd.between(0, 6);
+	officerData.option = game.rnd.between(0, 5);
 }
 
 function officerMovement(officer, officerData) {
 	console.log("x: "+officer.x+" | y: "+officer.y)
-	if(officer.x == 90 || officer.x == w-90 || officer.y == top_bottomfloor || officer.y == bottom_bottomfloor) {
+	if(officer.x == 90 || officer.x == w-90 || officer.y == 508 || officer.y == 565) {
 		officer.animations.play('officer-idle-looking');
 	}
 	switch (officerData.option) {
