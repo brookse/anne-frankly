@@ -58,6 +58,9 @@ playGame.prototype = {
     game.load.image('background', '/assets/images/background.png');
     game.load.spritesheet('anne-ss', '/assets/images/annefrank-ss.png', 120, 250);
     game.load.spritesheet('officer-ss', '/assets/images/officer-ss.png', 120, 250);
+    game.load.spritesheet('margot-ss', '/assets/images/margotfrank-ss.png', 120, 250);
+    game.load.spritesheet('otto-ss', '/assets/images/ottofrank-ss.png', 120, 250);
+    game.load.spritesheet('edith-ss', '/assets/images/edithfrank-ss.png', 120, 250);
 	},
 	
 	create: function() { 
@@ -83,6 +86,11 @@ playGame.prototype = {
     officerData.width = 120;
     officerData.height = 250;
 		officerData.facingLeft = true;
+		officerData.idleLeft = 'officer-idle-left';
+		officerData.idleRight = 'officer-idle-right';
+		officerData.idleLooking = 'officer-idle-looking';
+		officerData.walkLeft = 'officer-walk-left';
+		officerData.walkRight = 'officer-walk-right';
     
 		officer = game.add.sprite(game.world.centerX, bottom_bottomfloor-officerData.height, 'officer-ss');
 		officer.animations.add('officer-idle-left', [0], 1, true);
@@ -95,11 +103,35 @@ playGame.prototype = {
 		officerData.option = 0
 		officerData.readyToSwitch = false
 		game.time.events.loop(Phaser.Timer.SECOND * 2, switchOfficer, game, officerData)
+		
+		/* Margot stuff */
+		margotData.speed = 2;
+    margotData.width = 120;
+    margotData.height = 250;
+		margotData.facingLeft = true;
+		margotData.idleLeft = 'margot-idle-left';
+		margotData.idleRight = 'margot-idle-right';
+		margotData.idleLooking = 'margot-idle-looking';
+		margotData.walkLeft = 'margot-walk-left';
+		margotData.walkRight = 'margot-walk-right';
+    
+		margot = game.add.sprite(game.world.centerX/2, bottom_bottomfloor-margotData.height, 'margot-ss');
+		margot.animations.add('margot-idle-left', [0], 1, true);
+		margot.animations.add('margot-idle-right', [1], 1, true);
+		margot.animations.add('margot-idle-looking', [0,0,1,1,0,0,0,1], 3, true);
+		margot.animations.add('margot-walk-left', [2,3,4,5,6], 10, true);
+		margot.animations.add('margot-walk-right', [7,8,9,10,11], 10, true);
+    margot.animations.play('margot-idle-looking');
+    margot.anchor.setTo(0.5, 0.5);
+		margotData.option = 0
+		margotData.readyToSwitch = false
+		game.time.events.loop(Phaser.Timer.SECOND * 4, switchNPC, game, margotData)
 	},
 	
 	update: function() {
 		playerMovement(cursors, player, playerData);
-		officerMovement(officer, officerData);
+		npcMovement(officer, officerData, 509, 565, 90, w-90);
+		npcMovement(margot, margotData, top_topfloor-margotData.height, bottom_topfloor-playerData.height, 90, w-90);
 	},
 	
 	render: function() {
@@ -107,68 +139,66 @@ playGame.prototype = {
 	}
 }
 
-function switchOfficer(officerData) {
-	officerData.readyToSwitch = !officerData.readyToSwitch;
-	if (officerData.option == 0) {
-		officerData.option = game.rnd.between(1, 4);
+function switchNPC(data) {
+	data.readyToSwitch = !data.readyToSwitch;
+	if (data.option == 0) {
+		data.option = game.rnd.between(1, 4);
 	} else {
-		officerData.option = 0
+		data.option = 0
 	}
-	console.log('new option:'+officerData.option)
 }
 
-function officerMovement(officer, officerData) {
-	console.log("x: "+officer.x+" | y: "+officer.y)
-	switch (officerData.option) {
+function officerMovement(npc, data, top, bottom, left, right) {
+	switch (data.option) {
 		case 0:		// idle looking
-			officer.animations.play('officer-idle-looking');
+			npc.animations.play(data.idleLooking);
 			break;
 		case 1:		// move left
-			if (officer.x <= 90) {
-				officer.animations.play('officer-idle-looking');
-			} else if(officer.x > 90) {
-				officer.animations.play('officer-walk-left');
-				officer.x -= 1*officerData.speed;
-				officerData.facingLeft = true;
+			if (npc.x <= left) {
+				npc.animations.play(data.idleLooking);
+			} else if(npc.x > left) {
+				npc.animations.play(data.walkLeft);
+				npc.x -= 1*data.speed;
+				data.facingLeft = true;
 			}
 			break;
 		case 2:		// move right
-			if (officer.x >= w-90) {
-				officer.animations.play('officer-idle-looking');
-			} else if(officer.x < w-90) {
-				officer.animations.play('officer-walk-right');
-				officer.x += 1*officerData.speed;
-				officerData.facingLeft = false;
+			if (npc.x >= right) {
+				npc.animations.play(data.idleLooking);
+			} else if(npc.x < right) {
+				npc.animations.play(data.walkRight);
+				npc.x += 1*data.speed;
+				data.facingLeft = false;
 			}
 			break;
 		case 3:		// move up
-			if (officer.y <= 509) {
-				officer.animations.play('officer-idle-looking');
-			} else if(officer.y+officerData.height > top_bottomfloor) {
-				if(officerData.facingLeft) {
-					officer.animations.play('officer-walk-left');
-					officer.y -= 1*officerData.speed;
+			if (npc.y <= top) {
+				npc.animations.play(data.idleLooking);
+			} else if(npc.y > top) {
+				if(data.facingLeft) {
+					npc.animations.play(data.walkLeft);
+					npc.y -= 1*data.speed;
 				} else {
-					officer.animations.play('officer-walk-right');
-					officer.y -= 1*officerData.speed;
+					npc.animations.play(data.walkRight);
+					npc.y -= 1*data.speed;
 				}
 			}
 			break;
 		case 4:		// move down
-			if (officer.y >= 565) {
-				officer.animations.play('officer-idle-looking');
-			} else if (officer.y+officerData.height < bottom_bottomfloor) {
-				if(officerData.facingLeft) {
-					officer.animations.play('officer-walk-left');
-					officer.y += 1*officerData.speed;
+			if (npc.y >= bottom) {
+				npc.animations.play(data.idleLooking);
+			} else if (npc.y < bottom) {
+				if(data.facingLeft) {
+					npc.animations.play(data.walkLeft);
+					npc.y += 1*data.speed;
 				} else {
-					officer.animations.play('officer-walk-right');
-					officer.y += 1*officerData.speed;
+					npc.animations.play(data.walkRight);
+					npc.y += 1*data.speed;
 				}
 			}
 			break;
 		default:
-			officer.animations.play('officer-idle-looking');
+			npc.animations.play(data.idleLooking);
 	}
 }
 
