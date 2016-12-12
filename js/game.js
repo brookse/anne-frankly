@@ -53,8 +53,8 @@ playGame.prototype = {
 	preload: function() {
     // preloading the assets
     game.load.image('background', '/assets/images/background.png');
-    game.load.image('anne-idle-left', '/assets/images/annefrank-idle-left.png')
-    game.load.spritesheet('anne-walk-left', '/assets/images/annefrank-walk-left.png', 120, 250, 5);
+    game.load.spritesheet('anne-idle', '/assets/images/annefrank-idle.png', 120, 250)
+    game.load.spritesheet('anne-walk', '/assets/images/annefrank-walk.png', 120, 250);
 	},
 	
 	create: function() { 
@@ -64,12 +64,14 @@ playGame.prototype = {
     playerData.speed = 3;
     playerData.width = 120;
     playerData.height = 250;
+		playerData.facingLeft = true;
     cursors = game.input.keyboard.createCursorKeys();
     
 		player = game.add.sprite(game.world.centerX, bottom_topfloor-playerData.height, 'anne-idle-left');
     player.anchor.setTo(0.5, 0.5);
 		
     player.animations.add('anne-walk-left', [0,1,2,3,4], 5, true);
+    player.animations.add('anne-walk-right', [5,6,7,8,9], 5, true);
     player.animations.play('anne-idle-left', [0], 1, true);
 	},
 	
@@ -77,38 +79,89 @@ playGame.prototype = {
     if(cursors.left.isDown) {
       if(player.x > 90) {
         // walking animation
+				player.loadTexture('anne-walk')
+				player.animations.add('anne-walk-left', [0,1,2,3,4], 5, true);
         player.animations.play('anne-walk-left');
         player.x -= 1*playerData.speed;
+				playerData.facingLeft = true;
       }
     } else if (cursors.right.isDown) {
       if(player.x < w-90) {
         // walking animation, TODO change to right
-        player.animations.play('anne-walk-left');
+				player.loadTexture('anne-walk')
+				player.animations.add('anne-walk-right', [5,6,7,8,9], 5, true);
+				player.animations.play('anne-walk-right');
         player.x += 1*playerData.speed;
+				playerData.facingLeft = false;
       }
+			
     } else if (cursors.up.isDown) {
+			
       if(player.y+playerData.height > top_topfloor) {
-			player.animations.play('anne-walk-left');
-        player.y -= 1*playerData.speed;
+				if(playerData.facingLeft) {
+					player.loadTexture('anne-walk')
+					player.animations.add('anne-walk-left', [0,1,2,3,4], 5, true);
+	        player.animations.play('anne-walk-left');
+					if (cursors.left.isDown) {
+						player.x -= 1*playerData.speed;
+						player.y -= 1*playerData.speed;
+					} else {
+						player.y -= 1*playerData.speed;
+					}
+				} else {
+					player.loadTexture('anne-walk')
+		    	player.animations.add('anne-walk-right', [5,6,7,8,9], 5, true);
+	        player.animations.play('anne-walk-right');
+					if (cursors.right.isDown) {
+						player.x += 1*playerData.speed;
+						player.y -= 1*playerData.speed;
+					} else {
+						player.y -= 1*playerData.speed;
+					}
+				}
       }
+			
     } else if (cursors.down.isDown) {
+			
       if (player.y+playerData.height < bottom_topfloor) {
-			player.animations.play('anne-walk-left');
-        player.y += 1*playerData.speed;
+				if(playerData.facingLeft) {
+				player.loadTexture('anne-walk')
+					player.animations.add('anne-walk-left', [0,1,2,3,4], 5, true);
+	        player.animations.play('anne-walk-left');
+					if (cursors.left.isDown) {
+						player.x -= 1*playerData.speed;
+						player.y += 1*playerData.speed;
+					} else {
+						player.y += 1*playerData.speed;
+					}
+				} else {
+					player.loadTexture('anne-walk')
+		    	player.animations.add('anne-walk-right', [5,6,7,8,9], 5, true);
+	        player.animations.play('anne-walk-right');
+					if (cursors.right.isDown) {
+						player.x += 1*playerData.speed;
+						player.y += 1*playerData.speed;
+					} else {
+						player.y += 1*playerData.speed;
+					}
+				}
       }
+			
     }  else {
-      // idle animation
-			player.animations.play('anne-idle-left');
+			
+			if(playerData.facingLeft) {
+				player.loadTexture('anne-idle');
+				player.animations.add('anne-idle-left', [0], 1, true);
+				player.animations.play('anne-idle-left');
+			} else {
+				player.loadTexture('anne-idle');
+				player.animations.add('anne-idle-right', [1], 1, true);
+				player.animations.play('anne-idle-right');
+			}
     }
 	},
 	
 	render: function() {
     
 	}
-}
-
-function changeSprite(character, sprite, sprites, name, framerate) {
-  character.loadTexture(sprite);
-  player.animations.add(name, sprites, framerate, true);
-  character.animations.play(name);
 }
