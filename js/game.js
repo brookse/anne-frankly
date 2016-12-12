@@ -117,7 +117,7 @@ playGame.prototype = {
 		margotData.walkLeft = 'margot-walk-left';
 		margotData.walkRight = 'margot-walk-right';
     
-		margot = game.add.sprite(game.world.centerX/2, bottom_bottomfloor-margotData.height, 'margot-ss');
+		margot = game.add.sprite(game.world.centerX/2, bottom_topfloor-margotData.height, 'margot-ss');
 		margot.animations.add('margot-idle-left', [0], 1, true);
 		margot.animations.add('margot-idle-right', [1], 1, true);
 		margot.animations.add('margot-idle-looking', [0,0,1,1,0,0,0,1], 3, true);
