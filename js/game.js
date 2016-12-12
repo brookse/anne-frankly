@@ -33,6 +33,8 @@ var w = 990;
 var h = 700;
 var top_topfloor = 400;
 var bottom_topfloor = 455;
+var top_bottomfloor = 835;
+var bottom_bottomfloor 890;
 
 var cursors;
 var player;
@@ -53,11 +55,13 @@ playGame.prototype = {
 	preload: function() {
     game.load.image('background', '/assets/images/background.png');
     game.load.spritesheet('anne-ss', '/assets/images/annefrank-ss.png', 120, 250);
+    game.load.spritesheet('officer-ss', '/assets/images/officer-ss.png', 120, 250);
 	},
 	
 	create: function() { 
     background = game.add.sprite(0,0, 'background')
     
+		/* Player stuff */
     playerData.speed = 3;
     playerData.width = 120;
     playerData.height = 250;
@@ -71,6 +75,20 @@ playGame.prototype = {
 		player.animations.add('anne-walk-right', [7,8,9,10,11], 10, true);
     player.animations.play('anne-idle-left');
     player.anchor.setTo(0.5, 0.5);
+		
+		/* Officer stuff */
+		officerData.speed = 3;
+    officerData.width = 120;
+    officerData.height = 250;
+		officerData.facingLeft = true;
+    
+		officer = game.add.sprite(game.world.centerX, bottom_bottomfloor-officerData.height, 'officer-ss');
+		officer.animations.add('officer-idle-left', [0], 1, true);
+		officer.animations.add('officer-idle-right', [1], 1, true);
+		officer.animations.add('officer-walk-left', [2,3,4,5,6], 10, true);
+		officer.animations.add('officer-walk-right', [7,8,9,10,11], 10, true);
+    officer.animations.play('officer-idle-left');
+    officer.anchor.setTo(0.5, 0.5);
 	},
 	
 	update: function() {
