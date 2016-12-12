@@ -134,8 +134,10 @@ playGame.prototype = {
 		margotData.option = 0
 		margotData.readyToSwitch = false
 		game.time.events.loop(Phaser.Timer.SECOND * 4, switchNPC, game, margotData)
-		npcs.margot.npc = margot
-		npcs.margot.data = margotData
+		npcs.margot = {
+			npc: margot,
+			data: margotData
+		}
 		
 		margotNoise = game.add.sprite(margot.x, margot.y-80, 'noisemeter')
 		margotNoise.frame = 0
@@ -163,8 +165,10 @@ playGame.prototype = {
 		ottoData.option = 0
 		ottoData.readyToSwitch = false
 		game.time.events.loop(Phaser.Timer.SECOND * 5, switchNPC, game, ottoData)
-		npcs.otto.npc = otto
-		npcs.otto.data = ottoData
+		npcs.otto = {
+			npc: otto,
+			data: ottoData
+		}
 		
 		ottoNoise = game.add.sprite(otto.x, otto.y-80, 'noisemeter')
 		ottoNoise.frame = 0
@@ -192,8 +196,10 @@ playGame.prototype = {
 		edithData.option = 0
 		edithData.readyToSwitch = false
 		game.time.events.loop(Phaser.Timer.SECOND * 6, switchNPC, game, edithData)
-		npcs.edith.npc = edith;
-		npcs.edith.data = edithData;
+		npcs.edith = {
+			npc: edith,
+			data: edithData
+		}
 		
 		edithNoise = game.add.sprite(edith.x, edith.y-80, 'noisemeter')
 		edithNoise.frame = 0
