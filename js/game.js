@@ -113,7 +113,7 @@ function switchOfficer(officerData) {
 }
 
 function officerMovement(officer, officerData) {
-	print("x: "+officer.x+" | y: "+officer.y)
+	console.log("x: "+officer.x+" | y: "+officer.y)
 	if(officer.x == 90 || officer.x == w-90 || officer.y == top_bottomfloor || officer.y == bottom_bottomfloor) {
 		officer.animations.play('officer-idle-looking');
 	}
