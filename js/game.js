@@ -41,6 +41,8 @@ var player;
 var playerData = {}
 var officer;
 var officerData = {};
+var margot;
+var margotData = {};
 
 // creation of the game
 window.onload = function() {
