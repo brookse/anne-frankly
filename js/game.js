@@ -71,8 +71,8 @@ playGame.prototype = {
 		player = game.add.sprite(game.world.centerX, bottom_topfloor-playerData.height, 'anne-ss');
 		player.animations.add('anne-idle-left', [0], 1, true);
 		player.animations.add('anne-idle-right', [1], 1, true);
-		player.animations.add('anne-walk-left', [2,3,4,5,6], 5, true);
-		player.animations.add('anne-walk-right', [7,8,9,10,11], 5, true);
+		player.animations.add('anne-walk-left', [2,3,4,5,6], 10, true);
+		player.animations.add('anne-walk-right', [7,8,9,10,11], 10, true);
     player.animations.play('anne-idle-left');
     player.anchor.setTo(0.5, 0.5);
 	},
