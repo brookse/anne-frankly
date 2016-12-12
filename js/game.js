@@ -34,7 +34,7 @@ var h = 700;
 var top_topfloor = 400;
 var bottom_topfloor = 455;
 var top_bottomfloor = 835;
-var bottom_bottomfloor 890;
+var bottom_bottomfloor = 890;
 
 var cursors;
 var player;
