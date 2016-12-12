@@ -51,16 +51,12 @@ var wp;
 
 playGame.prototype = {
 	preload: function() {
-    // preloading the assets
     game.load.image('background', '/assets/images/background.png');
-    // game.load.spritesheet('anne-idle', '/assets/images/annefrank-idle.png', 120, 250)
-    // game.load.spritesheet('anne-walk', '/assets/images/annefrank-walk.png', 120, 250);
     game.load.spritesheet('anne-ss', '/assets/images/annefrank-ss.png', 120, 250);
 	},
 	
 	create: function() { 
     background = game.add.sprite(0,0, 'background')
-    // background.autoScroll(0, 30)
     
     playerData.speed = 3;
     playerData.width = 120;
@@ -78,76 +74,81 @@ playGame.prototype = {
 	},
 	
 	update: function() {
-    if(cursors.left.isDown) {
-      if(player.x > 90) {
-        // walking animation
-        player.animations.play('anne-walk-left');
-        player.x -= 1*playerData.speed;
-				playerData.facingLeft = true;
-      }
-    } else if (cursors.right.isDown) {
-      if(player.x < w-90) {
-        // walking animation, TODO change to right
-				player.animations.play('anne-walk-right');
-        player.x += 1*playerData.speed;
-				playerData.facingLeft = false;
-      }
-			
-    } else if (cursors.up.isDown) {
-			
-      if(player.y+playerData.height > top_topfloor) {
-				if(playerData.facingLeft) {
-	        player.animations.play('anne-walk-left');
-					if (cursors.left.isDown) {
-						player.x -= 1*playerData.speed;
-						player.y -= 1*playerData.speed;
-					} else {
-						player.y -= 1*playerData.speed;
-					}
-				} else {
-	        player.animations.play('anne-walk-right');
-					if (cursors.right.isDown) {
-						player.x += 1*playerData.speed;
-						player.y -= 1*playerData.speed;
-					} else {
-						player.y -= 1*playerData.speed;
-					}
-				}
-      }
-			
-    } else if (cursors.down.isDown) {
-			
-      if (player.y+playerData.height < bottom_topfloor) {
-				if(playerData.facingLeft) {
-	        player.animations.play('anne-walk-left');
-					if (cursors.left.isDown) {
-						player.x -= 1*playerData.speed;
-						player.y += 1*playerData.speed;
-					} else {
-						player.y += 1*playerData.speed;
-					}
-				} else {
-	        player.animations.play('anne-walk-right');
-					if (cursors.right.isDown) {
-						player.x += 1*playerData.speed;
-						player.y += 1*playerData.speed;
-					} else {
-						player.y += 1*playerData.speed;
-					}
-				}
-      }
-			
-    }  else {
-			
-			if(playerData.facingLeft) {
-				player.animations.play('anne-idle-left');
-			} else {
-				player.animations.play('anne-idle-right');
-			}
-    }
+		playerMovement()
+    
 	},
 	
 	render: function() {
     
+	}
+}
+
+function playerMovement(cursors, player, playerData) {
+	if(cursors.left.isDown) {
+		if(player.x > 90) {
+			// walking animation
+			player.animations.play('anne-walk-left');
+			player.x -= 1*playerData.speed;
+			playerData.facingLeft = true;
+		}
+	} else if (cursors.right.isDown) {
+		if(player.x < w-90) {
+			// walking animation, TODO change to right
+			player.animations.play('anne-walk-right');
+			player.x += 1*playerData.speed;
+			playerData.facingLeft = false;
+		}
+		
+	} else if (cursors.up.isDown) {
+		
+		if(player.y+playerData.height > top_topfloor) {
+			if(playerData.facingLeft) {
+				player.animations.play('anne-walk-left');
+				if (cursors.left.isDown) {
+					player.x -= 1*playerData.speed;
+					player.y -= 1*playerData.speed;
+				} else {
+					player.y -= 1*playerData.speed;
+				}
+			} else {
+				player.animations.play('anne-walk-right');
+				if (cursors.right.isDown) {
+					player.x += 1*playerData.speed;
+					player.y -= 1*playerData.speed;
+				} else {
+					player.y -= 1*playerData.speed;
+				}
+			}
+		}
+		
+	} else if (cursors.down.isDown) {
+		
+		if (player.y+playerData.height < bottom_topfloor) {
+			if(playerData.facingLeft) {
+				player.animations.play('anne-walk-left');
+				if (cursors.left.isDown) {
+					player.x -= 1*playerData.speed;
+					player.y += 1*playerData.speed;
+				} else {
+					player.y += 1*playerData.speed;
+				}
+			} else {
+				player.animations.play('anne-walk-right');
+				if (cursors.right.isDown) {
+					player.x += 1*playerData.speed;
+					player.y += 1*playerData.speed;
+				} else {
+					player.y += 1*playerData.speed;
+				}
+			}
+		}
+		
+	}  else {
+		
+		if(playerData.facingLeft) {
+			player.animations.play('anne-idle-left');
+		} else {
+			player.animations.play('anne-idle-right');
+		}
 	}
 }
