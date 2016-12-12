@@ -107,7 +107,7 @@ playGame.prototype = {
 }
 
 function changeSprite(character, sprite, name, framerate) {
-  character.loadTexture(sprite, 0);
+  character.loadTexture(sprite);
   player.animations.add(name);
-  character.animations.play(name, framerate, false);
+  character.animations.play(name, framerate, true);
 }
