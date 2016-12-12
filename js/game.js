@@ -109,7 +109,11 @@ playGame.prototype = {
 
 function switchOfficer(officerData) {
 	officerData.readyToSwitch = !officerData.readyToSwitch;
-	officerData.option = game.rnd.between(0, 5);
+	if (officerData.option == 0) {
+		officerData.option = game.rnd.between(1, 4);
+	} else {
+		officerData.option = 0
+	}
 }
 
 function officerMovement(officer, officerData) {
