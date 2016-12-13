@@ -37,6 +37,7 @@ var top_bottomfloor = 760;
 var bottom_bottomfloor = 815;
 
 var cursors;
+var spacebar;
 var npcs = {};
 var player;
 var playerData = {}
@@ -80,6 +81,7 @@ playGame.prototype = {
     playerData.height = 250;
 		playerData.facingLeft = true;
     cursors = game.input.keyboard.createCursorKeys();
+		spacebar = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     
 		player = game.add.sprite(game.world.centerX, bottom_topfloor-playerData.height, 'anne-ss');
 		player.animations.add('anne-idle-left', [0], 1, true);
@@ -224,7 +226,7 @@ playGame.prototype = {
 		npcMovement(edith, edithData, top_topfloor-edithData.height, bottom_topfloor-edithData.height, 90, w-90);
 		// checkNoiseLevel(npcs)
 		updateNoiseMeterPosition(npcs)
-		if (cursors.spacebar.isDown) {
+		if (spacebar.isDown) {
 			shush(player, playerData, npcs)
 		}
 	},
