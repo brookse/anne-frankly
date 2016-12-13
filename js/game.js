@@ -133,11 +133,11 @@ playGame.prototype = {
     margot.anchor.setTo(0.5, 0.5);
 		margotData.option = 0
 		margotData.readyToSwitch = false
-		game.time.events.loop(Phaser.Timer.SECOND * 3, switchNPC, game, margotData, margot)
 		npcs.margot = {
 			npc: margot,
 			data: margotData
 		}
+		game.time.events.loop(Phaser.Timer.SECOND * 3, switchNPC, game, npcs.margot)
 		
 		// margotNoise = game.add.sprite(margot.x, margot.y-80, 'noisemeter')
 		// margotNoise.frame = 0
@@ -164,11 +164,12 @@ playGame.prototype = {
     otto.anchor.setTo(0.5, 0.5);
 		ottoData.option = 0
 		ottoData.readyToSwitch = false
-		game.time.events.loop(Phaser.Timer.SECOND * 4, switchNPC, game, ottoData, otto)
 		npcs.otto = {
 			npc: otto,
 			data: ottoData
 		}
+		game.time.events.loop(Phaser.Timer.SECOND * 4, switchNPC, game, npcs.otto)
+		
 		// 
 		// ottoNoise = game.add.sprite(otto.x, otto.y-80, 'noisemeter')
 		// ottoNoise.frame = 0
@@ -195,11 +196,11 @@ playGame.prototype = {
     edith.anchor.setTo(0.5, 0.5);
 		edithData.option = 0
 		edithData.readyToSwitch = false
-		game.time.events.loop(Phaser.Timer.SECOND * 5, switchNPC, game, edithData, edith)
 		npcs.edith = {
 			npc: edith,
 			data: edithData
 		}
+		game.time.events.loop(Phaser.Timer.SECOND * 5, switchNPC, game, npcs.edith)
 		
 		// edithNoise = game.add.sprite(edith.x, edith.y-80, 'noisemeter')
 		// edithNoise.frame = 0
@@ -259,18 +260,18 @@ playGame.prototype = {
 // 	}
 // }
 
-function switchNPC(data, npc) {
-	data.readyToSwitch = !data.readyToSwitch;
-	if (data.option == 0) {
-		if (npc.x <= 91) {
-			data.option = 2;
-		} else if (npc.x >= w-90) {
-			data.option = 1
+function switchNPC(npc) {
+	npc.data.readyToSwitch = !npc.data.readyToSwitch;
+	if (npc.data.option == 0) {
+		if (npc.npc.x <= 91) {
+			npc.data.option = 2;
+		} else if (npc.npc.x >= w-90) {
+			npc.data.option = 1
 		} else {
-			data.option = game.rnd.between(1, 4);
+			npc.data.option = game.rnd.between(1, 4);
 		}
 	} else {
-		data.option = 0
+		npc.data.option = 0
 	}
 }
 
