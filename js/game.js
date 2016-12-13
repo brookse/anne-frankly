@@ -218,9 +218,7 @@ playGame.prototype = {
 		
 		
 		lose = game.add.sprite(game.world.centerX, game.world.centerY, 'lose');
-		lose.animations.add('lose', [0], 1, true);
-		lose.animations.add('win', [1], 1, true);
-		lose.animations.play('win');
+		lose.frame = 1
 		lose.anchor.setTo(0.5, 0.5);
 		
 		game.time.events.loop(Phaser.Timer.SECOND * 2, checkNoiseLevel, game, npcs)
@@ -239,7 +237,7 @@ playGame.prototype = {
 			}
 			checkLose(npcs)
 		} else {
-			lose.animations.play('lose');
+			lose.frame = 0
 		}
 	},
 	
