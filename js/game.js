@@ -140,8 +140,9 @@ playGame.prototype = {
 		}
 		game.time.events.loop(Phaser.Timer.SECOND * 3, switchNPC, game, margotData)
 		
-		margotNoise = game.add.sprite(margot.x, margot.y, 'noisemeter')
+		margotNoise = game.add.sprite(margot.x, margot.y-125, 'noisemeter')
 		margotNoise.frame = 0
+		margotNoise.anchor.setTo(0.5, 0.5);
 		margotData.noise = margotNoise
 		
 		/* Otto stuff */
@@ -172,8 +173,9 @@ playGame.prototype = {
 		}
 		game.time.events.loop(Phaser.Timer.SECOND * 4, switchNPC, game, ottoData)
 		
-		ottoNoise = game.add.sprite(otto.x, otto.y, 'noisemeter')
+		ottoNoise = game.add.sprite(otto.x, otto.y-125, 'noisemeter')
 		ottoNoise.frame = 0
+		ottoNoise.anchor.setTo(0.5, 0.5);
 		ottoData.noise = ottoNoise
 		
 		/* Edith stuff */
@@ -204,11 +206,12 @@ playGame.prototype = {
 		}
 		game.time.events.loop(Phaser.Timer.SECOND * 5, switchNPC, game, edithData)
 		
-		edithNoise = game.add.sprite(edith.x, edith.y, 'noisemeter')
+		edithNoise = game.add.sprite(edith.x, edith.y-125, 'noisemeter')
 		edithNoise.frame = 0
+		edithNoise.anchor.setTo(0.5, 0.5);
 		edithData.noise = edithNoise
 		
-		game.time.events.loop(Phaser.Timer.SECOND * 3, checkNoiseLevel, game, npcs)
+		game.time.events.loop(Phaser.Timer.SECOND * 2, checkNoiseLevel, game, npcs)
 	},
 	
 	update: function() {
