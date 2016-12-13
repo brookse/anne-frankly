@@ -63,7 +63,7 @@ var wp;
 playGame.prototype = {
 	preload: function() {
     game.load.image('background', '/assets/images/background.png');
-		game.load.image('noisemeter', '/assets/images/noisemeter.png', 150, 80);
+		game.load.spritesheet('noisemeter', '/assets/images/noisemeter.png', 150, 80);
     game.load.spritesheet('anne-ss', '/assets/images/annefrank-ss.png', 120, 250);
     game.load.spritesheet('officer-ss', '/assets/images/officer-ss.png', 120, 250);
     game.load.spritesheet('margot-ss', '/assets/images/margotfrank-ss.png', 120, 250);
@@ -140,9 +140,9 @@ playGame.prototype = {
 		}
 		game.time.events.loop(Phaser.Timer.SECOND * 3, switchNPC, game, margotData)
 		
-		// margotNoise = game.add.sprite(margot.x, margot.y-80, 'noisemeter')
-		// margotNoise.frame = 0
-		// margotData.noise = margotNoise
+		margotNoise = game.add.sprite(margot.x, margot.y-80, 'noisemeter')
+		margotNoise.frame = 0
+		margotData.noise = margotNoise
 		
 		/* Otto stuff */
 		ottoData.speed = 2;
@@ -172,10 +172,9 @@ playGame.prototype = {
 		}
 		game.time.events.loop(Phaser.Timer.SECOND * 4, switchNPC, game, ottoData)
 		
-		// 
-		// ottoNoise = game.add.sprite(otto.x, otto.y-80, 'noisemeter')
-		// ottoNoise.frame = 0
-		// ottoData.noise = ottoNoise
+		ottoNoise = game.add.sprite(otto.x, otto.y-80, 'noisemeter')
+		ottoNoise.frame = 0
+		ottoData.noise = ottoNoise
 		
 		/* Edith stuff */
 		edithData.speed = 2;
@@ -205,9 +204,9 @@ playGame.prototype = {
 		}
 		game.time.events.loop(Phaser.Timer.SECOND * 5, switchNPC, game, edithData)
 		
-		// edithNoise = game.add.sprite(edith.x, edith.y-80, 'noisemeter')
-		// edithNoise.frame = 0
-		// edithData.noise = edithNoise
+		edithNoise = game.add.sprite(edith.x, edith.y-80, 'noisemeter')
+		edithNoise.frame = 0
+		edithData.noise = edithNoise
 	},
 	
 	update: function() {
@@ -216,7 +215,7 @@ playGame.prototype = {
 		npcMovement(margot, margotData, top_topfloor-margotData.height, bottom_topfloor-playerData.height, 90, w-90);
 		npcMovement(otto, ottoData, top_topfloor-ottoData.height, bottom_topfloor-ottoData.height, 90, w-90);
 		npcMovement(edith, edithData, top_topfloor-edithData.height, bottom_topfloor-edithData.height, 90, w-90);
-		// checkNoiseLevel(npcs)
+		checkNoiseLevel(npcs)
 		// shush(player, npcs)
 	},
 	
@@ -236,32 +235,33 @@ playGame.prototype = {
 // 	}
 // }
 
-// function checkNoiseLevel(npcs) {	// only works with 3 npcs right now
-// 	// move noise meters
-// 	npcs.margot.data.noise.x = npcs.margot.npc.x
-// 	npcs.otto.data.noise.x = npcs.otto.npc.x
-// 	npcs.edith.data.noise.x = npcs.edith.npc.x
-// 	
-// 	// find distance between each npc
-// 	margotEdith = Math.abs(npcs.margot.npc.x - npcs.edith.npc.x)
-// 	margotOtto = Math.abs(npcs.margot.npc.x - npcs.otto.npc.x) 
-// 	edithOtto = Math.abs(npcs.edith.npc.x - npcs.otto.npc.x)
-// 	// if an average is within certain distance
-// 	if (margotEdith < 100) {
-// 		npcs.margot.data.noise.frame++
-// 		npcs.edith.data.noise.frame++
-// 	}
-// 	
-// 	if (margotOtto < 100) {
-// 		npcs.margot.data.noise.frame++
-// 		npcs.otto.data.noise.frame++
-// 	}
-// 	
-// 	if (edithOtto < 100) {
-// 		npcs.otto.data.noise.frame++
-// 		npcs.edith.data.noise.frame++
-// 	}
-// }
+function checkNoiseLevel(npcs) {	// only works with 3 npcs right now
+	// move noise meters
+	npcs.margot.data.noise.x = npcs.margot.npc.x
+	npcs.otto.data.noise.x = npcs.otto.npc.x
+	npcs.edith.data.noise.x = npcs.edith.npc.x
+	
+	// find distance between each npc
+	margotEdith = Math.abs(npcs.margot.npc.x - npcs.edith.npc.x)
+	margotOtto = Math.abs(npcs.margot.npc.x - npcs.otto.npc.x) 
+	edithOtto = Math.abs(npcs.edith.npc.x - npcs.otto.npc.x)
+	// if an average is within certain distance
+	if (margotEdith < 100) {
+		npcs.margot.data.noise.frame++
+		npcs.edith.data.noise.frame++
+	}
+	
+	if (margotOtto < 100) {
+		npcs.margot.data.noise.frame++
+		npcs.otto.data.noise.frame++
+	}
+	
+	if (edithOtto < 100) {
+		npcs.otto.data.noise.frame++
+		npcs.edith.data.noise.frame++
+	}
+}
+
 function switchNPC(data) {
 	data.previousOption = data.option
 	if (data.option == 0) {
