@@ -242,7 +242,7 @@ function shush(player, playerData, npcs) {
 		data = npcs[char].data
 		
 		playerNpc = Math.abs(npc.x - player.x)
-		console.log(playerNPC);
+		console.log(playerNpc);
 		if (playerNpc < 100) {
 			if (playerData.facingLeft) {
 				player.animations.play('anne-shush-left');
