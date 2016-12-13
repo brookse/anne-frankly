@@ -259,9 +259,8 @@ playGame.prototype = {
 // 		npcs.edith.data.noise.frame++
 // 	}
 // }
-
-function switchNPC(npc) {
-	npc.data.readyToSwitch = !npc.data.readyToSwitch;
+function switchnNPC(npc) {
+	console.log('NPC:'+npc);
 	if (npc.data.option == 0) {
 		if (npc.npc.x <= 91) {
 			npc.data.option = 2;
