@@ -132,12 +132,13 @@ playGame.prototype = {
     margot.animations.play('margot-idle-looking');
     margot.anchor.setTo(0.5, 0.5);
 		margotData.option = 0
+		margotData.previousOption = 0
 		margotData.readyToSwitch = false
 		npcs.margot = {
 			npc: margot,
 			data: margotData
 		}
-		game.time.events.loop(Phaser.Timer.SECOND * 3, switchNPC, game, npcs.margot)
+		game.time.events.loop(Phaser.Timer.SECOND * 3, switchNPC, game, margotData)
 		
 		// margotNoise = game.add.sprite(margot.x, margot.y-80, 'noisemeter')
 		// margotNoise.frame = 0
@@ -163,12 +164,13 @@ playGame.prototype = {
     otto.animations.play('otto-idle-looking');
     otto.anchor.setTo(0.5, 0.5);
 		ottoData.option = 0
+		ottoData.previousOption = 0
 		ottoData.readyToSwitch = false
 		npcs.otto = {
 			npc: otto,
 			data: ottoData
 		}
-		game.time.events.loop(Phaser.Timer.SECOND * 4, switchNPC, game, npcs.otto)
+		game.time.events.loop(Phaser.Timer.SECOND * 4, switchNPC, game, ottoData)
 		
 		// 
 		// ottoNoise = game.add.sprite(otto.x, otto.y-80, 'noisemeter')
@@ -195,12 +197,13 @@ playGame.prototype = {
     edith.animations.play('edith-idle-looking');
     edith.anchor.setTo(0.5, 0.5);
 		edithData.option = 0
+		edithData.previousOption = 0
 		edithData.readyToSwitch = false
 		npcs.edith = {
 			npc: edith,
 			data: edithData
 		}
-		game.time.events.loop(Phaser.Timer.SECOND * 5, switchNPC, game, npcs.edith)
+		game.time.events.loop(Phaser.Timer.SECOND * 5, switchNPC, game, edithData)
 		
 		// edithNoise = game.add.sprite(edith.x, edith.y-80, 'noisemeter')
 		// edithNoise.frame = 0
@@ -259,18 +262,18 @@ playGame.prototype = {
 // 		npcs.edith.data.noise.frame++
 // 	}
 // }
-function switchNPC(npc) {
-	console.log(npc);
-	if (npc.data.option == 0) {
-		if (npc.npc.x <= 91) {
-			npc.data.option = 2;
-		} else if (npc.npc.x >= w-90) {
-			npc.data.option = 1
-		} else {
-			npc.data.option = game.rnd.between(1, 4);
-		}
+function switchNPC(data) {
+	data.previousOption = data.option
+	if (data.option == 0) {
+		// if (npc.x <= 91) {
+		// 	data.option = 2;
+		// } else if (npc.npc.x >= w-90) {
+		// 	data.option = 1
+		// } else {
+		data.option = game.rnd.between(1, 4);
+		// }
 	} else {
-		npc.data.option = 0
+		data.option = 0
 	}
 }
 
