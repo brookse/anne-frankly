@@ -240,7 +240,7 @@ playGame.prototype = {
 function checkLose(npcs) {
 	for (var char in npcs) {
 		data = npcs[char].data
-		if data.noise.frame == 8 {
+		if (data.noise.frame == 8) {
 			console.log('LOSE');
 		}
 	}
