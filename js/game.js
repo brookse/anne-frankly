@@ -228,7 +228,7 @@ playGame.prototype = {
 		updateNoiseMeterPosition(npcs)
 		if (spacebar.isDown) {
 			console.log('shushing');
-			shush(player, playerData, npcs)
+			shush(player, playerData, npcs);
 		}
 	},
 	
@@ -238,7 +238,9 @@ playGame.prototype = {
 }
 
 function shush(player, playerData, npcs) {
+	console.log('shuuuuhhsh');
 	for (i=0; i < npcs.length; i++) {
+		console.log('i:'+i);
 		npc = npcs[i].npc
 		data = npcs[i].data
 		console.log(data.idleLeft);
