@@ -224,7 +224,6 @@ playGame.prototype = {
 		npcMovement(margot, margotData, top_topfloor-margotData.height, bottom_topfloor-playerData.height, 90, w-90);
 		npcMovement(otto, ottoData, top_topfloor-ottoData.height, bottom_topfloor-ottoData.height, 90, w-90);
 		npcMovement(edith, edithData, top_topfloor-edithData.height, bottom_topfloor-edithData.height, 90, w-90);
-		// checkNoiseLevel(npcs)
 		updateNoiseMeterPosition(npcs)
 		if (spacebar.isDown) {
 			console.log('shushing');
@@ -239,6 +238,7 @@ playGame.prototype = {
 
 function shush(player, playerData, npcs) {
 	for (var npc in npcs) {
+		console.log(npcs[npc])
 		npc = npcs[npc].npc
 		data = npcs[npc].data
 		
