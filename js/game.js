@@ -63,7 +63,7 @@ var wp;
 playGame.prototype = {
 	preload: function() {
     game.load.image('background', '/assets/images/background.png');
-		game.load.spritesheet('noisemeter', '/assets/images/noisemeter.png', 150, 80);
+		game.load.spritesheet('noisemeter', '/assets/images/noisemeter.png', 75, 40);
     game.load.spritesheet('anne-ss', '/assets/images/annefrank-ss.png', 120, 250);
     game.load.spritesheet('officer-ss', '/assets/images/officer-ss.png', 120, 250);
     game.load.spritesheet('margot-ss', '/assets/images/margotfrank-ss.png', 120, 250);
@@ -207,6 +207,8 @@ playGame.prototype = {
 		edithNoise = game.add.sprite(edith.x, edith.y-80, 'noisemeter')
 		edithNoise.frame = 0
 		edithData.noise = edithNoise
+		
+		game.time.events.loop(Phaser.Timer.SECOND * 5, checkNoiseLevel, game, npcs)
 	},
 	
 	update: function() {
@@ -215,7 +217,7 @@ playGame.prototype = {
 		npcMovement(margot, margotData, top_topfloor-margotData.height, bottom_topfloor-playerData.height, 90, w-90);
 		npcMovement(otto, ottoData, top_topfloor-ottoData.height, bottom_topfloor-ottoData.height, 90, w-90);
 		npcMovement(edith, edithData, top_topfloor-edithData.height, bottom_topfloor-edithData.height, 90, w-90);
-		checkNoiseLevel(npcs)
+		// checkNoiseLevel(npcs)
 		// shush(player, npcs)
 	},
 	
