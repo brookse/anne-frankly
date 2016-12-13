@@ -75,11 +75,6 @@ playGame.prototype = {
 	
 	create: function() { 
     background = game.add.sprite(0,0, 'background')
-		lose = game.add.sprite(game.world.centerX, game.world.centerY, 'lose');
-		lose.animations.add('lose', [1], 1, true);
-		lose.animations.add('win', [0], 1, true);
-		lose.animations.play('win');
-		lose.anchor.setTo(0.5, 0.5);
     
 		/* Player stuff */
     playerData.speed = 3;
@@ -220,6 +215,13 @@ playGame.prototype = {
 		edithNoise.frame = 0
 		edithNoise.anchor.setTo(0.5, 0.5);
 		edithData.noise = edithNoise
+		
+		
+		lose = game.add.sprite(game.world.centerX, game.world.centerY, 'lose');
+		lose.animations.add('lose', [0], 1, true);
+		lose.animations.add('win', [1], 1, true);
+		lose.animations.play('win');
+		lose.anchor.setTo(0.5, 0.5);
 		
 		game.time.events.loop(Phaser.Timer.SECOND * 2, checkNoiseLevel, game, npcs)
 	},
