@@ -229,10 +229,20 @@ playGame.prototype = {
 			console.log('shushing');
 			shush(player, playerData, npcs);
 		}
+		checkLose(npcs)
 	},
 	
 	render: function() {
     
+	}
+}
+
+function checkLose(npcs) {
+	for (var char in npcs) {
+		data = npcs[char].data
+		if data.noise.frame == 8 {
+			console.log('LOSE');
+		}
 	}
 }
 
@@ -242,14 +252,15 @@ function shush(player, playerData, npcs) {
 		data = npcs[char].data
 		
 		playerNpc = Math.abs(npc.x - player.x)
-		console.log(playerNpc);
 		if (playerNpc < 100) {
 			if (playerData.facingLeft) {
 				player.animations.play('anne-shush-left');
 			} else {
 				player.animations.play('anne-shush-right');
 			}
-			data.noise.frame--;
+			if (data.noise.frame > 1) {		// protect against negatives
+				data.noise.frame--;
+			}
 		}
 	}
 }
@@ -272,18 +283,30 @@ function checkNoiseLevel(npcs) {	// only works with 3 npcs right now
 	edithOtto = Math.abs(npcs.edith.npc.x - npcs.otto.npc.x)
 	// if an average is within certain distance
 	if (margotEdith < 100) {
-		npcs.margot.data.noise.frame++
-		npcs.edith.data.noise.frame++
+		if (npcs.margot.data.noise.frame < 8) {
+			npcs.margot.data.noise.frame++
+		}
+		if (npcs.edith.data.noise < 8) {
+			npcs.edith.data.noise.frame++
+		}
 	}
 	
 	if (margotOtto < 100) {
-		npcs.margot.data.noise.frame++
-		npcs.otto.data.noise.frame++
+		if (npcs.margot.data.noise.frame < 8) {
+			npcs.margot.data.noise.frame++
+		}
+		if (npcs.otto.data.noise < 8) {
+			npcs.otto.data.noise.frame++
+		}
 	}
 	
 	if (edithOtto < 100) {
-		npcs.otto.data.noise.frame++
-		npcs.edith.data.noise.frame++
+		if (npcs.otto.data.noise < 8) {
+			npcs.otto.data.noise.frame++
+		}
+		if (npcs.edith.data.noise < 8) {
+			npcs.edith.data.noise.frame++
+		}
 	}
 }
 
