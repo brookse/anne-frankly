@@ -313,7 +313,7 @@ function checkNoiseLevel(npcs) {	// only works with 3 npcs right now
 		if (npcs.otto.data.noise.frame < 9) {
 			npcs.otto.data.noise.frame++
 		}
-		if (npcs.edith.data.noise.frame < 9 {
+		if (npcs.edith.data.noise.frame < 9) {
 			npcs.edith.data.noise.frame++
 		}
 	}
