@@ -86,6 +86,8 @@ playGame.prototype = {
 		player.animations.add('anne-idle-right', [1], 1, true);
 		player.animations.add('anne-walk-left', [2,3,4,5,6], 10, true);
 		player.animations.add('anne-walk-right', [7,8,9,10,11], 10, true);
+		player.animations.add('anne-shush-left', [12], 1, true);
+		player.animations.add('anne-shush-right', [13], 1, true);
     player.animations.play('anne-idle-left');
     player.anchor.setTo(0.5, 0.5);
 		
@@ -140,7 +142,7 @@ playGame.prototype = {
 		}
 		game.time.events.loop(Phaser.Timer.SECOND * 3, switchNPC, game, margotData)
 		
-		margotNoise = game.add.sprite(margot.x, margot.y-135, 'noisemeter')
+		margotNoise = game.add.sprite(margot.x, margot.y-130, 'noisemeter')
 		margotNoise.frame = 0
 		margotNoise.anchor.setTo(0.5, 0.5);
 		margotData.noise = margotNoise
@@ -173,7 +175,7 @@ playGame.prototype = {
 		}
 		game.time.events.loop(Phaser.Timer.SECOND * 4, switchNPC, game, ottoData)
 		
-		ottoNoise = game.add.sprite(otto.x, otto.y-135, 'noisemeter')
+		ottoNoise = game.add.sprite(otto.x, otto.y-130, 'noisemeter')
 		ottoNoise.frame = 0
 		ottoNoise.anchor.setTo(0.5, 0.5);
 		ottoData.noise = ottoNoise
@@ -206,7 +208,7 @@ playGame.prototype = {
 		}
 		game.time.events.loop(Phaser.Timer.SECOND * 5, switchNPC, game, edithData)
 		
-		edithNoise = game.add.sprite(edith.x, edith.y-135, 'noisemeter')
+		edithNoise = game.add.sprite(edith.x, edith.y-130, 'noisemeter')
 		edithNoise.frame = 0
 		edithNoise.anchor.setTo(0.5, 0.5);
 		edithData.noise = edithNoise
@@ -222,7 +224,7 @@ playGame.prototype = {
 		npcMovement(edith, edithData, top_topfloor-edithData.height, bottom_topfloor-edithData.height, 90, w-90);
 		// checkNoiseLevel(npcs)
 		updateNoiseMeterPosition(npcs)
-		// shush(player, npcs)
+		shush(player, playerData, npcs)
 	},
 	
 	render: function() {
@@ -230,26 +232,32 @@ playGame.prototype = {
 	}
 }
 
-// function shush(player, npcs) {
-// 	for (i=0; i < npcs.length; i++) {
-// 		npc = npcs[i].npc
-// 		data = npcs[i].data
-// 		
-// 		if (player.x < npc.x-100) {
-// 			
-// 		}
-// 	}
-// }
+function shush(player, playerData, npcs) {
+	for (i=0; i < npcs.length; i++) {
+		npc = npcs[i].npc
+		data = npcs[i].data
+		
+		playerNpc = Math.abs(npc.npc.x - player.x)
+		if (playerNpc < 100) {
+			if (playerData.facingLeft) {
+				player.animations.play('anne-shush-left');
+			} else {
+				player.animations.play('anne-shush-right');
+			}
+			data.noise.frame--;
+		}
+	}
+}
 
 function updateNoiseMeterPosition(npcs) {
 	npcs.margot.data.noise.x = npcs.margot.npc.x
-	npcs.margot.data.noise.y = npcs.margot.npc.y-135
+	npcs.margot.data.noise.y = npcs.margot.npc.y-130
 	
 	npcs.otto.data.noise.x = npcs.otto.npc.x
-	npcs.otto.data.noise.y = npcs.otto.npc.y-135
+	npcs.otto.data.noise.y = npcs.otto.npc.y-130
 	
 	npcs.edith.data.noise.x = npcs.edith.npc.x
-	npcs.edith.data.noise.y = npcs.edith.npc.y-135
+	npcs.edith.data.noise.y = npcs.edith.npc.y-130
 }
 
 function checkNoiseLevel(npcs) {	// only works with 3 npcs right now
