@@ -221,7 +221,7 @@ playGame.prototype = {
 		lose.frame = 1
 		lose.anchor.setTo(0.5, 0.5);
 		
-		game.time.events.loop(Phaser.Timer.SECOND * 2, checkNoiseLevel, game, npcs)
+		game.time.events.loop(Phaser.Timer.SECOND * 1, checkNoiseLevel, game, npcs)
 	},
 	
 	update: function() {
