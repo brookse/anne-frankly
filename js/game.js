@@ -240,6 +240,7 @@ playGame.prototype = {
 function shush(player, playerData, npcs) {
 	console.log('shuuuuhhsh');
 	console.log(npcs);
+	console.log(npcs.length);
 	for (i = 0; i < npcs.length; i++) {
 		console.log('i:'+i);
 		npc = npcs[i].npc
