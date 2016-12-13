@@ -239,13 +239,14 @@ playGame.prototype = {
 
 function shush(player, playerData, npcs) {
 	console.log('shuuuuhhsh');
-	for (i=0; i < npcs.length; i++) {
+	console.log(npcs);
+	for (i = 0; i < npcs.length; i++) {
 		console.log('i:'+i);
 		npc = npcs[i].npc
 		data = npcs[i].data
 		console.log(data.idleLeft);
 		
-		playerNpc = Math.abs(npc.npc.x - player.x)
+		playerNpc = Math.abs(npc.x - player.x)
 		console.log(playerNPC);
 		if (playerNpc < 100) {
 			if (playerData.facingLeft) {
