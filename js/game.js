@@ -133,7 +133,7 @@ playGame.prototype = {
     margot.anchor.setTo(0.5, 0.5);
 		margotData.option = 0
 		margotData.readyToSwitch = false
-		game.time.events.loop(Phaser.Timer.SECOND * 4, switchNPC, game, margotData)
+		game.time.events.loop(Phaser.Timer.SECOND * 4, switchNPC, game, margotData, margot)
 		npcs.margot = {
 			npc: margot,
 			data: margotData
@@ -164,7 +164,7 @@ playGame.prototype = {
     otto.anchor.setTo(0.5, 0.5);
 		ottoData.option = 0
 		ottoData.readyToSwitch = false
-		game.time.events.loop(Phaser.Timer.SECOND * 5, switchNPC, game, ottoData)
+		game.time.events.loop(Phaser.Timer.SECOND * 5, switchNPC, game, ottoData, otto)
 		npcs.otto = {
 			npc: otto,
 			data: ottoData
@@ -195,7 +195,7 @@ playGame.prototype = {
     edith.anchor.setTo(0.5, 0.5);
 		edithData.option = 0
 		edithData.readyToSwitch = false
-		game.time.events.loop(Phaser.Timer.SECOND * 6, switchNPC, game, edithData)
+		game.time.events.loop(Phaser.Timer.SECOND * 6, switchNPC, game, edithData, edith)
 		npcs.edith = {
 			npc: edith,
 			data: edithData
@@ -247,10 +247,16 @@ function checkNoiseLevel(npcs) {	// only works with 3 npcs right now
 	}
 }
 
-function switchNPC(data) {
+function switchNPC(data, npc) {
 	data.readyToSwitch = !data.readyToSwitch;
 	if (data.option == 0) {
-		data.option = game.rnd.between(1, 4);
+		if (npc.x <= 90) {
+			data.option = 2;
+		} else if (npc.x >= w-90) {
+			data.option = 1
+		} else {
+			data.option = game.rnd.between(1, 4);
+		}
 	} else {
 		data.option = 0
 	}
