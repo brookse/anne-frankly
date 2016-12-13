@@ -260,7 +260,7 @@ playGame.prototype = {
 // 	}
 // }
 function switchNPC(npc) {
-	console.log('NPC:'+npc);
+	console.log(npc);
 	if (npc.data.option == 0) {
 		if (npc.npc.x <= 91) {
 			npc.data.option = 2;
