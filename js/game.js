@@ -224,7 +224,9 @@ playGame.prototype = {
 		npcMovement(edith, edithData, top_topfloor-edithData.height, bottom_topfloor-edithData.height, 90, w-90);
 		// checkNoiseLevel(npcs)
 		updateNoiseMeterPosition(npcs)
-		shush(player, playerData, npcs)
+		if (cursors.space.isDown) {
+			shush(player, playerData, npcs)
+		}
 	},
 	
 	render: function() {
