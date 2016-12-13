@@ -238,7 +238,6 @@ playGame.prototype = {
 
 function shush(player, playerData, npcs) {
 	for (var char in npcs) {
-		console.log(npcs[npc])
 		npc = npcs[char].npc
 		data = npcs[char].data
 		
