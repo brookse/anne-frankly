@@ -239,10 +239,8 @@ playGame.prototype = {
 
 function shush(player, playerData, npcs) {
 	for (var npc in npcs) {
-		console.log('i:'+i);
 		npc = npcs[npc].npc
 		data = npcs[npc].data
-		console.log(data.idleLeft);
 		
 		playerNpc = Math.abs(npc.x - player.x)
 		console.log(playerNPC);
