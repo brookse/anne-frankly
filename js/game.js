@@ -140,7 +140,7 @@ playGame.prototype = {
 		}
 		game.time.events.loop(Phaser.Timer.SECOND * 3, switchNPC, game, margotData)
 		
-		margotNoise = game.add.sprite(margot.x, margot.y-80, 'noisemeter')
+		margotNoise = game.add.sprite(margot.x, margot.y, 'noisemeter')
 		margotNoise.frame = 0
 		margotData.noise = margotNoise
 		
@@ -172,7 +172,7 @@ playGame.prototype = {
 		}
 		game.time.events.loop(Phaser.Timer.SECOND * 4, switchNPC, game, ottoData)
 		
-		ottoNoise = game.add.sprite(otto.x, otto.y-80, 'noisemeter')
+		ottoNoise = game.add.sprite(otto.x, otto.y, 'noisemeter')
 		ottoNoise.frame = 0
 		ottoData.noise = ottoNoise
 		
@@ -204,11 +204,11 @@ playGame.prototype = {
 		}
 		game.time.events.loop(Phaser.Timer.SECOND * 5, switchNPC, game, edithData)
 		
-		edithNoise = game.add.sprite(edith.x, edith.y-80, 'noisemeter')
+		edithNoise = game.add.sprite(edith.x, edith.y, 'noisemeter')
 		edithNoise.frame = 0
 		edithData.noise = edithNoise
 		
-		game.time.events.loop(Phaser.Timer.SECOND * 5, checkNoiseLevel, game, npcs)
+		game.time.events.loop(Phaser.Timer.SECOND * 3, checkNoiseLevel, game, npcs)
 	},
 	
 	update: function() {
@@ -218,6 +218,7 @@ playGame.prototype = {
 		npcMovement(otto, ottoData, top_topfloor-ottoData.height, bottom_topfloor-ottoData.height, 90, w-90);
 		npcMovement(edith, edithData, top_topfloor-edithData.height, bottom_topfloor-edithData.height, 90, w-90);
 		// checkNoiseLevel(npcs)
+		updateNoiseMeterPosition(npcs)
 		// shush(player, npcs)
 	},
 	
@@ -237,12 +238,13 @@ playGame.prototype = {
 // 	}
 // }
 
-function checkNoiseLevel(npcs) {	// only works with 3 npcs right now
-	// move noise meters
+function updateNoiseMeterPosition(npcs) {
 	npcs.margot.data.noise.x = npcs.margot.npc.x
 	npcs.otto.data.noise.x = npcs.otto.npc.x
 	npcs.edith.data.noise.x = npcs.edith.npc.x
-	
+}
+
+function checkNoiseLevel(npcs) {	// only works with 3 npcs right now
 	// find distance between each npc
 	margotEdith = Math.abs(npcs.margot.npc.x - npcs.edith.npc.x)
 	margotOtto = Math.abs(npcs.margot.npc.x - npcs.otto.npc.x) 
