@@ -227,6 +227,7 @@ playGame.prototype = {
 		// checkNoiseLevel(npcs)
 		updateNoiseMeterPosition(npcs)
 		if (spacebar.isDown) {
+			console.log('shushing');
 			shush(player, playerData, npcs)
 		}
 	},
@@ -240,8 +241,10 @@ function shush(player, playerData, npcs) {
 	for (i=0; i < npcs.length; i++) {
 		npc = npcs[i].npc
 		data = npcs[i].data
+		console.log(data.idleLeft);
 		
 		playerNpc = Math.abs(npc.npc.x - player.x)
+		console.log(playerNPC);
 		if (playerNpc < 100) {
 			if (playerData.facingLeft) {
 				player.animations.play('anne-shush-left');
