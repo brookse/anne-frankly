@@ -291,7 +291,7 @@ function checkNoiseLevel(npcs) {	// only works with 3 npcs right now
 	margotOtto = Math.abs(npcs.margot.npc.x - npcs.otto.npc.x) 
 	edithOtto = Math.abs(npcs.edith.npc.x - npcs.otto.npc.x)
 	// if an average is within certain distance
-	if (margotEdith < 200) {
+	if (margotEdith < 250) {
 		if (npcs.margot.data.noise.frame < 9) {
 			npcs.margot.data.noise.frame++
 		}
@@ -300,7 +300,7 @@ function checkNoiseLevel(npcs) {	// only works with 3 npcs right now
 		}
 	}
 	
-	if (margotOtto < 200) {
+	if (margotOtto < 250) {
 		if (npcs.margot.data.noise.frame < 9) {
 			npcs.margot.data.noise.frame++
 		}
@@ -309,7 +309,7 @@ function checkNoiseLevel(npcs) {	// only works with 3 npcs right now
 		}
 	}
 	
-	if (edithOtto < 200) {
+	if (edithOtto < 250) {
 		if (npcs.otto.data.noise.frame < 9) {
 			npcs.otto.data.noise.frame++
 		}
