@@ -15,9 +15,6 @@ body {
 }
 p {
   width: auto;
-  padding: 0;
-  position: absolute;
-  display: block;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
