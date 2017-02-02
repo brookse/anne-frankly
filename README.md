@@ -1,14 +1,11 @@
-# infinirunner
+# Anne Frankly
 
-Aqueducts is a short simple puzzle game made for [Ludum Dare 36 (theme: Ancient Technology)](http://ludumdare.com/compo/) by [Lyzzi Brooks](https://twitter.com/Lyzzi_Lightyear) and Adam Marchetti using [Phaser.io](http://phaser.io/).
+Anne Frankly is a short simple game made for [Ludum Dare 37 (theme: One Room)](http://ludumdare.com/compo/) by [Lyzzi Brooks](https://twitter.com/Lyzzi_Lightyear) using [Phaser.io](http://phaser.io/).
 
-Goal: Bring water from the lake to the town by connecting them via aqueducts. 
+In the heat of the Holocaust, join Anne Frank and her family as they hide from SS soldiers in their attic room. 
 
-Rules: 
-- Path from lake (blue tile) to town (orange tile) must be complete. You don't want to lose water!
-- Your workers are lazy and have placed down too many aqueduct parts. Not all tiles will always be used.
-- Lakes are stationary, so they cannot be turned.
-- Some lakes can service multiple towns.
-- There should be only one way to solve each level.
+------------- 
 
-Aqueducts can be played here: https://aqueducts.herokuapp.com/
+Although technically it's two rooms, the top room is the "one room". Your family members' noise meters rise when they are near each other (and talking too loudly!) Anne is controllable with the directional arrows. Press space when near family members to shush them if they're being too loud. If one of their noise meters reaches the last red tick, you lose. 
+
+Anne Frankly can be played here: https://anne-frankly.herokuapp.com/
