@@ -340,6 +340,8 @@ function switchNPC(data) {
 	} else {
 		data.option = 0
 	}
+	console.log('prev'+data.previousOption);
+	console.log('now'+data.option);
 }
 
 function npcMovement(npc, data, top, bottom, left, right) {
