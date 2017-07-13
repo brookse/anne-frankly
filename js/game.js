@@ -34,7 +34,7 @@ var h = 700;
 var top_topfloor = 400;
 var bottom_topfloor = 455;
 var top_bottomfloor = 760;
-var bottom_bottomfloor = 815;
+var bottom_bottomfloor = 810;
 
 var cursors;
 var spacebar;
@@ -67,7 +67,7 @@ playGame.prototype = {
 		game.load.spritesheet('lose', '/assets/images/lose.png', 450, 350);
 		game.load.spritesheet('noisemeter', '/assets/images/noisemeter.png', 75, 40);
     game.load.spritesheet('anne-ss', '/assets/images/annefrank-ss.png', 120, 250);
-    game.load.spritesheet('officer-ss', '/assets/images/officer-ss.png', 120, 250);
+    game.load.spritesheet('officer-ss', '/assets/images/officer-ss.png', 120, 270);
     game.load.spritesheet('margot-ss', '/assets/images/margotfrank-ss.png', 120, 250);
     game.load.spritesheet('otto-ss', '/assets/images/ottofrank-ss.png', 120, 250);
     game.load.spritesheet('edith-ss', '/assets/images/edithfrank-ss.png', 120, 250);
@@ -113,8 +113,8 @@ playGame.prototype = {
 		officer.animations.add('officer-idle-looking', [0,0,1,1,0,0,0,1], 3, true);
 		officer.animations.add('officer-walk-left', [2,3,4,5,6], 10, true);
 		officer.animations.add('officer-walk-right', [7,8,9,10,11], 10, true);
-		officer.animations.add('officer-activity-left', [12, 13, 12], 2, true);
-		officer.animations.add('officer-activity-right', [14, 15, 14], 2, true);
+		officer.animations.add('officer-activity-left', [12, 13, 12, 13, 12, 12], 1, true);
+		officer.animations.add('officer-activity-right', [14, 15, 14, 15, 14, 14], 2, true);
     officer.animations.play('officer-idle-looking');
     officer.anchor.setTo(0.5, 0.5);
 		officerData.option = 0
