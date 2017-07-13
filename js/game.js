@@ -392,6 +392,10 @@ function npcMovement(npc, data, top, bottom, left, right) {
 			}
 			break;
 		case 5:		// perform activity
+			if (data.isOfficer) {
+				console.log('YYYY'+npc.y);
+				console.log('TOP'+top);
+			}
 			if (data.isOfficer && npc.y <= top) {
 				if (data.facingLeft) {
 					npc.animations.play(data.activityLeft);
