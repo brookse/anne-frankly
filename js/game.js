@@ -341,7 +341,7 @@ function switchNPC(data) {
 		data.option = 0
 	}
 	console.log('prev'+data.previousOption);
-	console.log('now'+data.option);
+	console.log('now '+data.option);
 }
 
 function npcMovement(npc, data, top, bottom, left, right) {
@@ -396,7 +396,7 @@ function npcMovement(npc, data, top, bottom, left, right) {
 		case 5:		// perform activity
 			if (data.isOfficer) {
 				console.log('YYYY'+npc.y);
-				console.log('TOP'+top);
+				console.log('TOP '+top);
 			}
 			if (data.isOfficer && npc.y <= top) {
 				if (data.facingLeft) {
