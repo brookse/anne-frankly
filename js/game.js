@@ -72,10 +72,10 @@ playGame.prototype = {
     game.load.spritesheet('otto-ss', '/assets/images/ottofrank-ss.png', 120, 250);
     game.load.spritesheet('edith-ss', '/assets/images/edithfrank-ss.png', 120, 250);
 	},
-	
-	create: function() { 
+
+	create: function() {
     background = game.add.sprite(0,0, 'background')
-    
+
 		/* Player stuff */
     playerData.speed = 3;
     playerData.width = 120;
@@ -83,7 +83,7 @@ playGame.prototype = {
 		playerData.facingLeft = true;
     cursors = game.input.keyboard.createCursorKeys();
 		spacebar = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-    
+
 		player = game.add.sprite(game.world.centerX, bottom_topfloor-playerData.height, 'anne-ss');
 		player.animations.add('anne-idle-left', [0], 1, true);
 		player.animations.add('anne-idle-right', [1], 1, true);
@@ -93,30 +93,35 @@ playGame.prototype = {
 		player.animations.add('anne-shush-right', [13], 1, true);
     player.animations.play('anne-idle-left');
     player.anchor.setTo(0.5, 0.5);
-		
+
 		/* Officer stuff */
 		officerData.speed = 2;
     officerData.width = 120;
-    officerData.height = 250;
+    officerData.height = 270;
 		officerData.facingLeft = true;
 		officerData.idleLeft = 'officer-idle-left';
 		officerData.idleRight = 'officer-idle-right';
 		officerData.idleLooking = 'officer-idle-looking';
 		officerData.walkLeft = 'officer-walk-left';
 		officerData.walkRight = 'officer-walk-right';
-    
+		officerData.pokeLeft = 'officer-poke-left';
+		officerData.pokeRight = 'officer-poke-right';
+
 		officer = game.add.sprite(game.world.centerX, bottom_bottomfloor-officerData.height, 'officer-ss');
 		officer.animations.add('officer-idle-left', [0], 1, true);
 		officer.animations.add('officer-idle-right', [1], 1, true);
 		officer.animations.add('officer-idle-looking', [0,0,1,1,0,0,0,1], 3, true);
 		officer.animations.add('officer-walk-left', [2,3,4,5,6], 10, true);
 		officer.animations.add('officer-walk-right', [7,8,9,10,11], 10, true);
+		officer.animations.add('officer-poke-left', [12, 13, 12], 2, true);
+		officer.animations.add('officer-poke-right', [14, 15, 14], 2, true);
     officer.animations.play('officer-idle-looking');
     officer.anchor.setTo(0.5, 0.5);
 		officerData.option = 0
 		officerData.readyToSwitch = false
+		officerData.isOfficer = true;
 		game.time.events.loop(Phaser.Timer.SECOND * 2, switchNPC, game, officerData)
-		
+
 		/* Margot stuff */
 		margotData.speed = 2;
     margotData.width = 120;
@@ -127,7 +132,7 @@ playGame.prototype = {
 		margotData.idleLooking = 'margot-idle-looking';
 		margotData.walkLeft = 'margot-walk-left';
 		margotData.walkRight = 'margot-walk-right';
-    
+
 		margot = game.add.sprite(game.world.centerX/2, bottom_topfloor-margotData.height, 'margot-ss');
 		margot.animations.add('margot-idle-left', [0], 1, true);
 		margot.animations.add('margot-idle-right', [1], 1, true);
@@ -138,18 +143,19 @@ playGame.prototype = {
     margot.anchor.setTo(0.5, 0.5);
 		margotData.option = 0
 		margotData.previousOption = 0
+		margotData.isOfficer = true;
 		margotData.readyToSwitch = false
 		npcs.margot = {
 			npc: margot,
 			data: margotData
 		}
 		game.time.events.loop(Phaser.Timer.SECOND * 3, switchNPC, game, margotData)
-		
+
 		margotNoise = game.add.sprite(margot.x, margot.y-130, 'noisemeter')
 		margotNoise.frame = 0
 		margotNoise.anchor.setTo(0.5, 0.5);
 		margotData.noise = margotNoise
-		
+
 		/* Otto stuff */
 		ottoData.speed = 2;
     ottoData.width = 120;
@@ -160,7 +166,7 @@ playGame.prototype = {
 		ottoData.idleLooking = 'otto-idle-looking';
 		ottoData.walkLeft = 'otto-walk-left';
 		ottoData.walkRight = 'otto-walk-right';
-    
+
 		otto = game.add.sprite(game.world.centerX+200, bottom_topfloor-ottoData.height, 'otto-ss');
 		otto.animations.add('otto-idle-left', [0], 1, true);
 		otto.animations.add('otto-idle-right', [1], 1, true);
@@ -171,18 +177,19 @@ playGame.prototype = {
     otto.anchor.setTo(0.5, 0.5);
 		ottoData.option = 0
 		ottoData.previousOption = 0
+		ottoData.isOfficer = true;
 		ottoData.readyToSwitch = false
 		npcs.otto = {
 			npc: otto,
 			data: ottoData
 		}
 		game.time.events.loop(Phaser.Timer.SECOND * 4, switchNPC, game, ottoData)
-		
+
 		ottoNoise = game.add.sprite(otto.x, otto.y-130, 'noisemeter')
 		ottoNoise.frame = 0
 		ottoNoise.anchor.setTo(0.5, 0.5);
 		ottoData.noise = ottoNoise
-		
+
 		/* Edith stuff */
 		edithData.speed = 2;
     edithData.width = 120;
@@ -193,7 +200,7 @@ playGame.prototype = {
 		edithData.idleLooking = 'edith-idle-looking';
 		edithData.walkLeft = 'edith-walk-left';
 		edithData.walkRight = 'edith-walk-right';
-    
+
 		edith = game.add.sprite(100, bottom_topfloor-edithData.height, 'edith-ss');
 		edith.animations.add('edith-idle-left', [0], 1, true);
 		edith.animations.add('edith-idle-right', [1], 1, true);
@@ -204,26 +211,27 @@ playGame.prototype = {
     edith.anchor.setTo(0.5, 0.5);
 		edithData.option = 0
 		edithData.previousOption = 0
+		edithData.isOfficer = true;
 		edithData.readyToSwitch = false
 		npcs.edith = {
 			npc: edith,
 			data: edithData
 		}
 		game.time.events.loop(Phaser.Timer.SECOND * 5, switchNPC, game, edithData)
-		
+
 		edithNoise = game.add.sprite(edith.x, edith.y-130, 'noisemeter')
 		edithNoise.frame = 0
 		edithNoise.anchor.setTo(0.5, 0.5);
 		edithData.noise = edithNoise
-		
-		
+
+
 		lose = game.add.sprite(game.world.centerX, game.world.centerY, 'lose');
 		lose.frame = 1
 		lose.anchor.setTo(0.5, 0.5);
-		
+
 		game.time.events.loop(Phaser.Timer.SECOND * 1, checkNoiseLevel, game, npcs)
 	},
-	
+
 	update: function() {
 		if (!gameLost) {
 			playerMovement(cursors, player, playerData);
@@ -240,9 +248,9 @@ playGame.prototype = {
 			lose.frame = 0
 		}
 	},
-	
+
 	render: function() {
-    
+
 	}
 }
 
@@ -259,7 +267,7 @@ function shush(player, playerData, npcs) {
 	for (var char in npcs) {
 		npc = npcs[char].npc
 		data = npcs[char].data
-		
+
 		playerNpc = Math.abs(npc.x - player.x)
 		if (playerNpc < 100) {
 			if (playerData.facingLeft) {
@@ -277,10 +285,10 @@ function shush(player, playerData, npcs) {
 function updateNoiseMeterPosition(npcs) {
 	npcs.margot.data.noise.x = npcs.margot.npc.x
 	npcs.margot.data.noise.y = npcs.margot.npc.y-130
-	
+
 	npcs.otto.data.noise.x = npcs.otto.npc.x
 	npcs.otto.data.noise.y = npcs.otto.npc.y-130
-	
+
 	npcs.edith.data.noise.x = npcs.edith.npc.x
 	npcs.edith.data.noise.y = npcs.edith.npc.y-130
 }
@@ -288,7 +296,7 @@ function updateNoiseMeterPosition(npcs) {
 function checkNoiseLevel(npcs) {	// only works with 3 npcs right now
 	// find distance between each npc
 	margotEdith = Math.abs(npcs.margot.npc.x - npcs.edith.npc.x)
-	margotOtto = Math.abs(npcs.margot.npc.x - npcs.otto.npc.x) 
+	margotOtto = Math.abs(npcs.margot.npc.x - npcs.otto.npc.x)
 	edithOtto = Math.abs(npcs.edith.npc.x - npcs.otto.npc.x)
 	// if an average is within certain distance
 	if (margotEdith < 250) {
@@ -299,7 +307,7 @@ function checkNoiseLevel(npcs) {	// only works with 3 npcs right now
 			npcs.edith.data.noise.frame++
 		}
 	}
-	
+
 	if (margotOtto < 250) {
 		if (npcs.margot.data.noise.frame < 9) {
 			npcs.margot.data.noise.frame++
@@ -308,7 +316,7 @@ function checkNoiseLevel(npcs) {	// only works with 3 npcs right now
 			npcs.otto.data.noise.frame++
 		}
 	}
-	
+
 	if (edithOtto < 250) {
 		if (npcs.otto.data.noise.frame < 9) {
 			npcs.otto.data.noise.frame++
@@ -359,7 +367,20 @@ function npcMovement(npc, data, top, bottom, left, right) {
 			break;
 		case 3:		// move up
 			if (npc.y <= top) {
-				npc.animations.play(data.idleLooking);
+				if (data.isOfficer) {
+					var opt = game.rnd.between(0, 10);
+					if (opt % 3 == 0) {
+						if (data.facingLeft) {
+							npc.animations.play(data.pokeLeft);
+						} else {
+							npc.animations.play(data.pokeRight);
+						}
+					} else {
+						npc.animations.play(data.idleLooking);
+					}
+				} else {
+					npc.animations.play(data.idleLooking);
+				}
 			} else if(npc.y > top) {
 				if(data.facingLeft) {
 					npc.animations.play(data.walkLeft);
@@ -403,9 +424,9 @@ function playerMovement(cursors, player, playerData) {
 			player.x += 1*playerData.speed;
 			playerData.facingLeft = false;
 		}
-		
+
 	} else if (cursors.up.isDown) {
-		
+
 		if(player.y+playerData.height > top_topfloor) {
 			if(playerData.facingLeft) {
 				player.animations.play('anne-walk-left');
@@ -425,9 +446,9 @@ function playerMovement(cursors, player, playerData) {
 				}
 			}
 		}
-		
+
 	} else if (cursors.down.isDown) {
-		
+
 		if (player.y+playerData.height < bottom_topfloor) {
 			if(playerData.facingLeft) {
 				player.animations.play('anne-walk-left');
@@ -447,9 +468,9 @@ function playerMovement(cursors, player, playerData) {
 				}
 			}
 		}
-		
+
 	}  else {
-		
+
 		if(playerData.facingLeft) {
 			player.animations.play('anne-idle-left');
 		} else {
