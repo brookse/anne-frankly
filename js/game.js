@@ -143,7 +143,7 @@ playGame.prototype = {
     margot.anchor.setTo(0.5, 0.5);
 		margotData.option = 0
 		margotData.previousOption = 0
-		margotData.isOfficer = true;
+		margotData.isOfficer = false;
 		margotData.readyToSwitch = false
 		npcs.margot = {
 			npc: margot,
@@ -177,7 +177,7 @@ playGame.prototype = {
     otto.anchor.setTo(0.5, 0.5);
 		ottoData.option = 0
 		ottoData.previousOption = 0
-		ottoData.isOfficer = true;
+		ottoData.isOfficer = false;
 		ottoData.readyToSwitch = false
 		npcs.otto = {
 			npc: otto,
@@ -211,7 +211,7 @@ playGame.prototype = {
     edith.anchor.setTo(0.5, 0.5);
 		edithData.option = 0
 		edithData.previousOption = 0
-		edithData.isOfficer = true;
+		edithData.isOfficer = false;
 		edithData.readyToSwitch = false
 		npcs.edith = {
 			npc: edith,
