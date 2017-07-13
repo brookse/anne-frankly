@@ -104,8 +104,8 @@ playGame.prototype = {
 		officerData.idleLooking = 'officer-idle-looking';
 		officerData.walkLeft = 'officer-walk-left';
 		officerData.walkRight = 'officer-walk-right';
-		officerData.pokeLeft = 'officer-poke-left';
-		officerData.pokeRight = 'officer-poke-right';
+		officerData.activityLeft = 'officer-activity-left';
+		officerData.activityRight = 'officer-activity-right';
 
 		officer = game.add.sprite(game.world.centerX, bottom_bottomfloor-officerData.height, 'officer-ss');
 		officer.animations.add('officer-idle-left', [0], 1, true);
@@ -113,8 +113,8 @@ playGame.prototype = {
 		officer.animations.add('officer-idle-looking', [0,0,1,1,0,0,0,1], 3, true);
 		officer.animations.add('officer-walk-left', [2,3,4,5,6], 10, true);
 		officer.animations.add('officer-walk-right', [7,8,9,10,11], 10, true);
-		officer.animations.add('officer-poke-left', [12, 13, 12], 2, true);
-		officer.animations.add('officer-poke-right', [14, 15, 14], 2, true);
+		officer.animations.add('officer-activity-left', [12, 13, 12], 2, true);
+		officer.animations.add('officer-activity-right', [14, 15, 14], 2, true);
     officer.animations.play('officer-idle-looking');
     officer.anchor.setTo(0.5, 0.5);
 		officerData.option = 0
@@ -235,7 +235,7 @@ playGame.prototype = {
 	update: function() {
 		if (!gameLost) {
 			playerMovement(cursors, player, playerData);
-			npcMovement(officer, officerData, 509, 565, 90, w-90);
+			npcMovement(officer, officerData, top_bottomfloor-officerData.height, bottom_bottomfloor-officerData.height, 90, w-90);
 			npcMovement(margot, margotData, top_topfloor-margotData.height, bottom_topfloor-playerData.height, 90, w-90);
 			npcMovement(otto, ottoData, top_topfloor-ottoData.height, bottom_topfloor-ottoData.height, 90, w-90);
 			npcMovement(edith, edithData, top_topfloor-edithData.height, bottom_topfloor-edithData.height, 90, w-90);
@@ -335,7 +335,7 @@ function switchNPC(data) {
 		// } else if (npc.npc.x >= w-90) {
 		// 	data.option = 1
 		// } else {
-		data.option = game.rnd.between(1, 4);
+		data.option = game.rnd.between(1, 5);
 		// }
 	} else {
 		data.option = 0
@@ -367,15 +367,7 @@ function npcMovement(npc, data, top, bottom, left, right) {
 			break;
 		case 3:		// move up
 			if (npc.y <= top) {
-				if (data.isOfficer) {
-					if (data.facingLeft) {
-						npc.animations.play(data.pokeLeft);
-					} else {
-						npc.animations.play(data.pokeRight);
-					}
-				} else {
-					npc.animations.play(data.idleLooking);
-				}
+				npc.animations.play(data.idleLooking);
 			} else if(npc.y > top) {
 				if(data.facingLeft) {
 					npc.animations.play(data.walkLeft);
@@ -397,6 +389,17 @@ function npcMovement(npc, data, top, bottom, left, right) {
 					npc.animations.play(data.walkRight);
 					npc.y += 1*data.speed;
 				}
+			}
+			break;
+		case 5:		// perform activity
+			if (data.isOfficer && npc.y <= top) {
+				if (data.facingLeft) {
+					npc.animations.play(data.activityLeft);
+				} else {
+					npc.animations.play(data.activityRight);
+				}
+			} else {
+				npc.animations.play(data.idleLooking);
 			}
 			break;
 		default:
