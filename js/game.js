@@ -368,15 +368,10 @@ function npcMovement(npc, data, top, bottom, left, right) {
 		case 3:		// move up
 			if (npc.y <= top) {
 				if (data.isOfficer) {
-					var opt = game.rnd.between(0, 10);
-					if (opt % 3 == 0) {
-						if (data.facingLeft) {
-							npc.animations.play(data.pokeLeft);
-						} else {
-							npc.animations.play(data.pokeRight);
-						}
+					if (data.facingLeft) {
+						npc.animations.play(data.pokeLeft);
 					} else {
-						npc.animations.play(data.idleLooking);
+						npc.animations.play(data.pokeRight);
 					}
 				} else {
 					npc.animations.play(data.idleLooking);
